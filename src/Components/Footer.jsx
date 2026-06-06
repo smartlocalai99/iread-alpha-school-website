@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { MapPin, Phone, Mail } from "lucide-react";
 
 export default function Footer() {
@@ -31,56 +32,102 @@ export default function Footer() {
   return (
     <footer className="bg-[#071B3D] text-white">
 
-      {/* Top CTA */}
+      {/* Top CTA — perspective tilt scale-in */}
       <div className="max-w-[1450px] mx-auto px-5 sm:px-6 lg:px-8 pt-16 md:pt-20">
-        <div className="relative overflow-hidden rounded-[24px] md:rounded-[32px] bg-gradient-to-r from-[#0B1F45] to-[#12336B] p-8 sm:p-10 lg:p-14">
+        <motion.div
+          className="relative overflow-hidden rounded-[24px] md:rounded-[32px] bg-gradient-to-r from-[#0B1F45] to-[#12336B] p-8 sm:p-10 lg:p-14"
+          initial={{ opacity: 0, y: 50, rotateX: 8, scale: 0.95 }}
+          whileInView={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.9, type: "spring", stiffness: 60, damping: 12 }}
+          style={{ perspective: "800px" }}
+        >
           {/* Decorative */}
           <div className="absolute top-0 right-0 w-[200px] h-[200px] md:w-[300px] md:h-[300px] rounded-full bg-[#C89B3C]/5 -translate-y-1/2 translate-x-1/3" />
           <div className="absolute bottom-0 left-1/2 w-[150px] h-[150px] rounded-full bg-[#C89B3C]/3 translate-y-1/2" />
 
           <div className="max-w-3xl relative z-10">
-            <p className="uppercase tracking-[4px] text-[#C89B3C] font-semibold text-xs md:text-sm">
+            <motion.p
+              className="uppercase tracking-[4px] text-[#C89B3C] font-semibold text-xs md:text-sm"
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+            >
               Admissions Open
-            </p>
+            </motion.p>
 
-            <h2
+            <motion.h2
               className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl mt-3 md:mt-4 leading-tight"
               style={{ fontFamily: "var(--font-serif)" }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3, duration: 0.7 }}
             >
               Shape Your Child&apos;s
               <br />
               Future With Us
-            </h2>
+            </motion.h2>
 
-            <p className="text-white/70 mt-4 md:mt-6 text-sm md:text-base lg:text-lg leading-7">
+            <motion.p
+              className="text-white/70 mt-4 md:mt-6 text-sm md:text-base lg:text-lg leading-7"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5 }}
+            >
               Empowering young minds with academic excellence,
               leadership and lifelong values.
-            </p>
+            </motion.p>
 
-            <div className="flex flex-col sm:flex-row gap-3 mt-7 md:mt-8">
-              <a
+            <motion.div
+              className="flex flex-col sm:flex-row gap-3 mt-7 md:mt-8"
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.6 }}
+            >
+              <motion.a
                 href="#admissions"
                 onClick={(e) => handleNavClick(e, "#admissions")}
                 className="bg-[#C89B3C] text-black px-7 py-3.5 rounded-xl font-semibold hover:bg-[#D4AD5A] hover:shadow-lg transition text-sm md:text-base text-center"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
               >
                 Apply Now
-              </a>
-              <button className="border border-white/20 px-7 py-3.5 rounded-xl hover:bg-white/10 transition text-sm md:text-base">
+              </motion.a>
+              <motion.button
+                className="border border-white/20 px-7 py-3.5 rounded-xl hover:bg-white/10 transition text-sm md:text-base"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 Download Prospectus
-              </button>
-            </div>
+              </motion.button>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
 
-      {/* Main Footer */}
+      {/* Main Footer — wave rise-up with staggered columns */}
       <div className="max-w-[1450px] mx-auto px-5 sm:px-6 lg:px-8 py-14 md:py-20">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
 
           {/* Brand */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0 }}
+          >
             <div className="flex items-center gap-3 mb-5 md:mb-6">
-              <img src="/logo.png" alt="IREAD ALPHA" className="w-12 h-12 object-contain" />
+              <motion.img
+                src="/logo.png"
+                alt="IREAD ALPHA"
+                className="w-12 h-12 object-contain"
+                whileHover={{ rotate: 10, scale: 1.1 }}
+                transition={{ type: "spring", stiffness: 200 }}
+              />
               <div>
                 <h3
                   className="text-xl md:text-2xl font-bold"
@@ -99,10 +146,15 @@ export default function Footer() {
               education, holistic development and nurturing
               every student&apos;s potential.
             </p>
-          </div>
+          </motion.div>
 
           {/* Quick Links */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+          >
             <h4
               className="text-lg md:text-xl font-semibold mb-5 md:mb-6"
               style={{ fontFamily: "var(--font-serif)" }}
@@ -111,21 +163,31 @@ export default function Footer() {
             </h4>
 
             <div className="space-y-3">
-              {quickLinks.map((item) => (
-                <a
+              {quickLinks.map((item, i) => (
+                <motion.a
                   key={item.label}
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
                   className="block text-white/70 hover:text-[#C89B3C] cursor-pointer transition text-sm md:text-base"
+                  initial={{ opacity: 0, x: -15 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 + i * 0.08 }}
+                  whileHover={{ x: 5 }}
                 >
                   {item.label}
-                </a>
+                </motion.a>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Explore */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+          >
             <h4
               className="text-lg md:text-xl font-semibold mb-5 md:mb-6"
               style={{ fontFamily: "var(--font-serif)" }}
@@ -134,21 +196,31 @@ export default function Footer() {
             </h4>
 
             <div className="space-y-3">
-              {exploreLinks.map((item) => (
-                <a
+              {exploreLinks.map((item, i) => (
+                <motion.a
                   key={item.label}
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
                   className="block text-white/70 hover:text-[#C89B3C] cursor-pointer transition text-sm md:text-base"
+                  initial={{ opacity: 0, x: -15 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 + i * 0.08 }}
+                  whileHover={{ x: 5 }}
                 >
                   {item.label}
-                </a>
+                </motion.a>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Contact */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+          >
             <h4
               className="text-lg md:text-xl font-semibold mb-5 md:mb-6"
               style={{ fontFamily: "var(--font-serif)" }}
@@ -184,33 +256,46 @@ export default function Footer() {
             </div>
 
             {/* Google Maps CTA */}
-            <a
+            <motion.a
               href="https://share.google/nik0wr5rePc3AQBxB"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 mt-5 text-[#C89B3C] hover:text-[#D4AD5A] transition text-sm font-medium"
+              whileHover={{ x: 5 }}
             >
               <MapPin size={14} />
               <span>View on Google Maps →</span>
-            </a>
-          </div>
+            </motion.a>
+          </motion.div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-white/10 mt-12 md:mt-16 pt-6 md:pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <motion.div
+          className="border-t border-white/10 mt-12 md:mt-16 pt-6 md:pt-8 flex flex-col sm:flex-row justify-between items-center gap-4"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+        >
           <p className="text-white/50 text-sm">
             © 2026 IREAD ALPHA English Medium High School. All Rights Reserved.
           </p>
 
           <div className="flex gap-6 text-white/50 text-sm">
-            <p className="hover:text-white cursor-pointer transition">
+            <motion.p
+              className="hover:text-white cursor-pointer transition"
+              whileHover={{ y: -2 }}
+            >
               Privacy Policy
-            </p>
-            <p className="hover:text-white cursor-pointer transition">
+            </motion.p>
+            <motion.p
+              className="hover:text-white cursor-pointer transition"
+              whileHover={{ y: -2 }}
+            >
               Terms & Conditions
-            </p>
+            </motion.p>
           </div>
-        </div>
+        </motion.div>
       </div>
     </footer>
   );

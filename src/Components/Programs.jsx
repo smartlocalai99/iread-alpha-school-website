@@ -91,6 +91,7 @@ export default function ProgramsSection() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [countdown, setCountdown] = useState(5);
   const [isPaused, setIsPaused] = useState(false);
+  const [hasAnimated, setHasAnimated] = useState(false);
   const { ref, inView } = useInView({ triggerOnce: false, threshold: 0.2 });
 
   const activeProgram = programs[activeIndex];
@@ -118,6 +119,13 @@ export default function ProgramsSection() {
     return () => clearInterval(timer);
   }, [isPaused, inView, goToNext]);
 
+  // Trigger orbital animation on first view
+  useEffect(() => {
+    if (inView && !hasAnimated) {
+      setHasAnimated(true);
+    }
+  }, [inView, hasAnimated]);
+
   const selectProgram = (index) => {
     setActiveIndex(index);
     setCountdown(5);
@@ -134,6 +142,9 @@ export default function ProgramsSection() {
     };
   };
 
+  // Wheel container size
+  const wheelSize = 440;
+
   return (
     <section
       ref={ref}
@@ -141,21 +152,53 @@ export default function ProgramsSection() {
       className="relative overflow-hidden py-16 md:py-20 lg:py-24"
       style={{ background: "linear-gradient(180deg, #FDFBF7 0%, #FFF 50%, #FDFBF7 100%)" }}
     >
+      {/* Floating decorative particles */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {[...Array(6)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-2 h-2 rounded-full bg-[#C89B3C]/10"
+            style={{
+              left: `${15 + i * 15}%`,
+              top: `${20 + (i % 3) * 25}%`,
+            }}
+            animate={{
+              y: [0, -30, 0],
+              opacity: [0.3, 0.7, 0.3],
+            }}
+            transition={{
+              duration: 4 + i * 0.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: i * 0.7,
+            }}
+          />
+        ))}
+      </div>
+
       {/* Section Header */}
       <div className="max-w-[1450px] mx-auto px-5 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 50, filter: "blur(10px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
           className="text-center mb-12 md:mb-16"
         >
           <div className="flex justify-center items-center gap-3 mb-4">
-            <div className="w-3 h-3 rotate-45 bg-[#C89B3C]" />
+            <motion.div
+              className="w-3 h-3 rotate-45 bg-[#C89B3C]"
+              animate={{ rotate: [45, 225, 45] }}
+              transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+            />
             <p className="text-[#C89B3C] uppercase tracking-[4px] font-semibold text-sm">
               Our Programs
             </p>
-            <div className="w-3 h-3 rotate-45 bg-[#C89B3C]" />
+            <motion.div
+              className="w-3 h-3 rotate-45 bg-[#C89B3C]"
+              animate={{ rotate: [45, -135, 45] }}
+              transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+            />
           </div>
 
           <h2
@@ -175,30 +218,43 @@ export default function ProgramsSection() {
         {/* Main Content Grid */}
         <div className="grid lg:grid-cols-[1fr_1fr] gap-10 lg:gap-14 items-center">
 
-          {/* LEFT: Program Detail Card */}
+          {/* LEFT: Program Detail Card with glassmorphism entrance */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, x: -60, filter: "blur(15px)" }}
+            whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.2 }}
+            transition={{ duration: 0.9, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeProgram.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.4, type: "spring", stiffness: 300, damping: 30 }}
+                initial={{ opacity: 0, y: 30, scale: 0.95, filter: "blur(8px)" }}
+                animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+                exit={{ opacity: 0, y: -30, scale: 0.95, filter: "blur(8px)" }}
+                transition={{ duration: 0.5, type: "spring", stiffness: 200, damping: 25 }}
                 className="bg-white rounded-[28px] border border-gray-100 shadow-lg overflow-hidden"
               >
                 {/* Image — robust container */}
                 <div className="relative overflow-hidden aspect-[16/10]">
-                  <img
+                  <motion.img
                     src={activeProgram.image}
                     alt={activeProgram.title}
                     className="w-full h-full object-cover object-center"
+                    initial={{ scale: 1.1 }}
+                    animate={{ scale: 1 }}
+                    transition={{ duration: 0.7 }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+
+                  {/* Floating icon badge */}
+                  <motion.div
+                    className="absolute top-4 right-4 w-12 h-12 rounded-xl bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg"
+                    initial={{ scale: 0, rotate: -180 }}
+                    animate={{ scale: 1, rotate: 0 }}
+                    transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
+                  >
+                    <activeProgram.icon size={22} className="text-[#C89B3C]" />
+                  </motion.div>
                 </div>
 
                 {/* Content */}
@@ -223,9 +279,12 @@ export default function ProgramsSection() {
 
                   {/* Benefits */}
                   <div className="flex flex-wrap gap-2 sm:gap-3">
-                    {activeProgram.benefits.map((benefit) => (
-                      <div
+                    {activeProgram.benefits.map((benefit, i) => (
+                      <motion.div
                         key={benefit}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.4 + i * 0.1 }}
                         className="flex items-center gap-2 bg-[#FBFAF7] border border-gray-100 rounded-lg px-2.5 sm:px-3 py-1.5 sm:py-2"
                       >
                         <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-md bg-[#C89B3C]/10 flex items-center justify-center shrink-0">
@@ -234,7 +293,7 @@ export default function ProgramsSection() {
                           </svg>
                         </div>
                         <span className="text-[11px] sm:text-xs font-medium text-gray-700 whitespace-nowrap">{benefit}</span>
-                      </div>
+                      </motion.div>
                     ))}
                   </div>
                 </div>
@@ -242,12 +301,12 @@ export default function ProgramsSection() {
             </AnimatePresence>
           </motion.div>
 
-          {/* RIGHT: Programs Wheel */}
+          {/* RIGHT: Programs Wheel with IMAGE nodes */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, rotate: -5 }}
-            whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3, type: "spring", stiffness: 100 }}
+            transition={{ duration: 1, delay: 0.3, type: "spring", stiffness: 80 }}
             className="hidden lg:flex flex-col items-center"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
@@ -255,71 +314,164 @@ export default function ProgramsSection() {
             {/* Wheel Container */}
             <div className="relative w-[440px] h-[440px]">
 
-              {/* Outer decorative rings */}
-              <div className="absolute inset-0 rounded-full border-2 border-gray-200/60" />
-              <div className="absolute inset-3 rounded-full border border-gray-100/40" />
+              {/* Outer decorative rings with rotation */}
+              <motion.div
+                className="absolute inset-0 rounded-full border-2 border-gray-200/60"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+                style={{ borderStyle: "dashed", borderDashoffset: 0 }}
+              />
+              <motion.div
+                className="absolute inset-3 rounded-full border border-[#C89B3C]/10"
+                animate={{ rotate: -360 }}
+                transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
+              />
 
               {/* Connection line to active node */}
               <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 0 }}>
-                <line
+                <motion.line
                   x1="50%" y1="50%"
                   x2={`${50 + (getWheelPosition(activeIndex).x / 440) * 100}%`}
                   y2={`${50 + (getWheelPosition(activeIndex).y / 440) * 100}%`}
-                  stroke="rgba(200,155,60,0.15)"
+                  stroke="rgba(200,155,60,0.2)"
                   strokeWidth="2"
                   strokeDasharray="6 4"
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1 }}
+                  transition={{ duration: 0.4 }}
                 />
               </svg>
 
-              {/* Program items around the wheel */}
+              {/* Program items around the wheel — now with IMAGES */}
               {programs.map((program, index) => {
                 const pos = getWheelPosition(index);
                 const isActive = index === activeIndex;
                 const Icon = program.icon;
+                const orbitAngle = (index * 360) / totalPrograms;
 
                 return (
-                  <motion.button
+                  <motion.div
                     key={program.id}
-                    onClick={() => selectProgram(index)}
-                    className="absolute flex flex-col items-center gap-1.5 group z-10"
+                    className="absolute z-10"
                     style={{
-                      left: "50%",
-                      top: "50%",
-                      transform: `translate(calc(-50% + ${pos.x}px), calc(-50% + ${pos.y}px))`,
+                      left: `${wheelSize / 2 + pos.x}px`,
+                      top: `${wheelSize / 2 + pos.y}px`,
+                      transform: "translate(-50%, -50%)",
                     }}
-                    whileHover={{ scale: 1.15 }}
-                    whileTap={{ scale: 0.92 }}
-                    animate={isActive ? { scale: 1.1 } : { scale: 1 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    initial={hasAnimated ? false : {
+                      opacity: 0,
+                      scale: 0,
+                      rotate: orbitAngle + 180,
+                    }}
+                    animate={{
+                      opacity: 1,
+                      scale: 1,
+                      rotate: 0,
+                    }}
+                    transition={{
+                      duration: 0.8,
+                      delay: index * 0.1,
+                      type: "spring",
+                      stiffness: 120,
+                      damping: 15,
+                    }}
                   >
-                    <div
-                      className={`
-                        w-14 h-14 rounded-xl flex items-center justify-center transition-all duration-400 shadow-sm
-                        ${isActive
-                          ? "bg-[#0B2148] text-white shadow-lg"
-                          : "bg-white text-[#0B2148] border border-gray-200 group-hover:border-[#C89B3C] group-hover:shadow-md"
-                        }
-                      `}
-                      style={isActive ? { animation: "activeNodePulse 2s ease-in-out infinite" } : {}}
+                    <motion.button
+                      onClick={() => selectProgram(index)}
+                      className="flex flex-col items-center gap-1.5 group"
+                      whileHover={{ scale: 1.15 }}
+                      whileTap={{ scale: 0.92 }}
+                      animate={isActive ? { scale: 1.1 } : { scale: 1 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
                     >
-                      <Icon size={22} />
-                    </div>
-                    <span
-                      className={`
-                        text-[10px] font-semibold text-center leading-tight max-w-[80px] uppercase tracking-wide transition-colors duration-300
-                        ${isActive ? "text-[#0B2148]" : "text-gray-500 group-hover:text-[#0B2148]"}
-                      `}
-                    >
-                      {program.title.length > 18
-                        ? program.title.replace(" & ", " &\n")
-                        : program.title}
-                    </span>
-                  </motion.button>
+                      {/* Image node with circular crop */}
+                      <div className="relative">
+                        {/* Glow ring for active */}
+                        {isActive && (
+                          <motion.div
+                            className="absolute -inset-1.5 rounded-full"
+                            style={{
+                              background: "conic-gradient(from 0deg, #C89B3C, #D4AD5A, #C89B3C, #A67E2E, #C89B3C)",
+                            }}
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                          />
+                        )}
+
+                        {/* Image container */}
+                        <div
+                          className={`
+                            relative w-16 h-16 rounded-full overflow-hidden transition-all duration-400 shadow-sm
+                            ${isActive
+                              ? "shadow-lg ring-0"
+                              : "border-2 border-gray-200 group-hover:border-[#C89B3C] group-hover:shadow-md"
+                            }
+                          `}
+                        >
+                          <img
+                            src={program.image}
+                            alt={program.title}
+                            className="w-full h-full object-cover object-center"
+                          />
+
+                          {/* Dark overlay for inactive */}
+                          <div
+                            className={`absolute inset-0 transition-all duration-300 ${
+                              isActive
+                                ? "bg-transparent"
+                                : "bg-[#0B2148]/20 group-hover:bg-transparent"
+                            }`}
+                          />
+                        </div>
+
+                        {/* Small icon badge */}
+                        <div
+                          className={`
+                            absolute -bottom-1 -right-1 w-6 h-6 rounded-full flex items-center justify-center text-white shadow-md transition-all duration-300
+                            ${isActive ? "bg-[#C89B3C]" : "bg-[#0B2148] group-hover:bg-[#C89B3C]"}
+                          `}
+                        >
+                          <Icon size={12} />
+                        </div>
+                      </div>
+
+                      <span
+                        className={`
+                          text-[10px] font-semibold text-center leading-tight max-w-[80px] uppercase tracking-wide transition-colors duration-300
+                          ${isActive ? "text-[#0B2148]" : "text-gray-500 group-hover:text-[#0B2148]"}
+                        `}
+                      >
+                        {program.title.length > 18
+                          ? program.title.replace(" & ", " &\n")
+                          : program.title}
+                      </span>
+                    </motion.button>
+                  </motion.div>
                 );
               })}
 
-              {/* Center Logo */}
+              {/* Center Logo with expanding glow */}
               <div className="absolute inset-0 flex items-center justify-center z-20">
+                {/* Pulsing glow rings behind center */}
+                <motion.div
+                  className="absolute w-[170px] h-[170px] rounded-full"
+                  style={{ border: "1px solid rgba(200,155,60,0.1)" }}
+                  animate={{
+                    scale: [1, 1.3, 1],
+                    opacity: [0.5, 0, 0.5],
+                  }}
+                  transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut" }}
+                />
+                <motion.div
+                  className="absolute w-[170px] h-[170px] rounded-full"
+                  style={{ border: "1px solid rgba(200,155,60,0.08)" }}
+                  animate={{
+                    scale: [1, 1.5, 1],
+                    opacity: [0.3, 0, 0.3],
+                  }}
+                  transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut", delay: 0.8 }}
+                />
+
                 <motion.div
                   className="w-[150px] h-[150px] rounded-full bg-white flex flex-col items-center justify-center"
                   style={{
@@ -396,7 +548,14 @@ export default function ProgramsSection() {
                   `}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Icon size={16} className="shrink-0" />
+                  {/* Small circular image for mobile */}
+                  <div className="w-7 h-7 rounded-full overflow-hidden shrink-0 border border-white/30">
+                    <img
+                      src={program.image}
+                      alt={program.title}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                   <span className="whitespace-nowrap">{program.title}</span>
                 </motion.button>
               );

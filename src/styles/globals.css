@@ -103,6 +103,36 @@ video {
   animation-play-state: paused;
 }
 
+/* Ticker shimmer overlay */
+.ticker-shimmer-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.ticker-shimmer {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(200, 155, 60, 0.04) 30%,
+    rgba(200, 155, 60, 0.08) 50%,
+    rgba(200, 155, 60, 0.04) 70%,
+    transparent 100%
+  );
+  animation: tickerShimmer 6s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 10;
+}
+
+@keyframes tickerShimmer {
+  0% { left: -60%; }
+  100% { left: 160%; }
+}
+
 /* ===== CLIP SHAPE ===== */
 
 .clip-corner {
@@ -217,6 +247,86 @@ video {
   justify-content: center;
 }
 
+/* ===== CINEMATIC CLIP-PATH REVEAL (Hero) ===== */
+
+@keyframes clipRevealRight {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0% 0 0); }
+}
+
+@keyframes clipRevealCenter {
+  from { clip-path: inset(50% 50% 50% 50%); }
+  to { clip-path: inset(0% 0% 0% 0%); }
+}
+
+@keyframes clipRevealUp {
+  from { clip-path: inset(100% 0 0 0); }
+  to { clip-path: inset(0% 0 0 0); }
+}
+
+/* ===== 3D CARD TILT STYLES ===== */
+
+.perspective-card {
+  perspective: 800px;
+  transform-style: preserve-3d;
+}
+
+/* ===== BLUR-TO-SHARP FOCUS ===== */
+
+@keyframes blurToSharp {
+  from { filter: blur(12px); opacity: 0; }
+  to { filter: blur(0px); opacity: 1; }
+}
+
+/* ===== ELASTIC SPRING BOUNCE ===== */
+
+@keyframes elasticBounce {
+  0% { transform: scale(0); }
+  50% { transform: scale(1.15); }
+  70% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+/* ===== PARALLAX TEXT DRIFT ===== */
+
+@keyframes driftLeft {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-30px); }
+}
+
+@keyframes driftRight {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(30px); }
+}
+
+/* ===== GOLDEN GLOW FOCUS RING ===== */
+
+input:focus, textarea:focus {
+  border-color: var(--gold) !important;
+  box-shadow: 0 0 0 3px rgba(200, 155, 60, 0.1);
+}
+
+/* ===== WAVE RISE STAGGER ===== */
+
+@keyframes waveRise {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== CONIC GRADIENT SPIN (Active wheel node) ===== */
+
+@keyframes conicSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ===== GLOW RING EXPAND ===== */
+
+@keyframes glowRingExpand {
+  0% { transform: scale(1); opacity: 0.5; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
 /* ===== PROGRAMS WHEEL — RESPONSIVE SCALING ===== */
 
 @media (max-width: 639px) {
@@ -256,6 +366,10 @@ video {
 
   .clip-corner {
     clip-path: none;
+  }
+
+  .ticker-shimmer {
+    animation-duration: 4s;
   }
 }
 

@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import {
   BookOpen,
   Award,
@@ -26,8 +27,17 @@ export default function FeaturesTicker() {
   const items = [...features, ...features];
 
   return (
-    <section className="w-full px-4 sm:px-6 py-6 md:py-8 bg-[#f8f8f8]">
-      <div className="max-w-[1450px] mx-auto bg-white rounded-2xl md:rounded-3xl shadow-lg overflow-hidden">
+    <motion.section
+      className="w-full px-4 sm:px-6 py-6 md:py-8 bg-[#f8f8f8]"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+    >
+      <div className="max-w-[1450px] mx-auto bg-white rounded-2xl md:rounded-3xl shadow-lg overflow-hidden relative ticker-shimmer-container">
+        {/* Shimmer shine pass overlay */}
+        <div className="ticker-shimmer" />
+
         <div className="ticker-track">
           {items.map((item, index) => {
             const Icon = item.icon;
@@ -35,11 +45,11 @@ export default function FeaturesTicker() {
             return (
               <div
                 key={index}
-                className="flex items-center gap-3 md:gap-4 px-7 sm:px-9 md:px-11 py-5 md:py-7 shrink-0 border-r border-gray-200/70"
+                className="flex items-center gap-3 md:gap-4 px-7 sm:px-9 md:px-11 py-5 md:py-7 shrink-0 border-r border-gray-200/70 group hover:bg-[#FBFAF7] transition-colors duration-300"
               >
                 <Icon
                   size={28}
-                  className="text-[#C89B3C] md:w-[34px] md:h-[34px]"
+                  className="text-[#C89B3C] md:w-[34px] md:h-[34px] group-hover:scale-110 transition-transform duration-300"
                   strokeWidth={1.8}
                 />
                 <span
@@ -54,6 +64,6 @@ export default function FeaturesTicker() {
           })}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
