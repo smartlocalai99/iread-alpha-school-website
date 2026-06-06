@@ -1,26 +1,292 @@
 @import "tailwindcss";
 
+/* ===== COLOR SYSTEM (from Hero Section) ===== */
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --navy-primary: #0B2148;
+  --navy-dark: #0B1F45;
+  --navy-deep: #052A63;
+  --navy-bg: #081D42;
+  --navy-footer: #071B3D;
+  --gold: #C89B3C;
+  --gold-light: #D4AD5A;
+  --gold-dark: #A67E2E;
+  --cream: #FBFAF7;
+  --cream-light: #FDF9F0;
+  --border-light: #EAEAEA;
+  --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ===== GLOBAL RESET ===== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  width: 100%;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== TYPOGRAPHY ===== */
+
+.font-serif {
+  font-family: var(--font-serif) !important;
+}
+
+/* ===== RESPONSIVE IMAGES ===== */
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ===== SCROLLBAR HIDE UTILITY ===== */
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ===== TICKER ===== */
+
+@keyframes ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker 25s linear infinite;
+  will-change: transform;
+}
+
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+/* ===== CLIP SHAPE ===== */
+
+.clip-corner {
+  clip-path: polygon(
+    100% 0,
+    0 0,
+    100% 100%
+  );
+}
+
+/* ===== LOADER ANIMATIONS ===== */
+
+@keyframes logoFloat {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-8px) scale(1.03); }
+}
+
+@keyframes logoPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(200, 155, 60, 0.4); }
+  50% { box-shadow: 0 0 40px 15px rgba(200, 155, 60, 0.15); }
+}
+
+@keyframes loaderProgress {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ===== REVEAL ANIMATIONS ===== */
+
+@keyframes revealLeft {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+@keyframes revealRight {
+  from { transform: translateX(0); }
+  to { transform: translateX(100%); }
+}
+
+@keyframes goldLineExpand {
+  from { width: 0; opacity: 0; }
+  to { width: 80px; opacity: 1; }
+}
+
+/* ===== PROGRAMS WHEEL ===== */
+
+@keyframes wheelSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 20px rgba(200, 155, 60, 0.2); }
+  50% { box-shadow: 0 0 40px rgba(200, 155, 60, 0.4); }
+}
+
+@keyframes activeNodePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(200, 155, 60, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(200, 155, 60, 0); }
+}
+
+/* ===== COUNTER / STATS ANIMATIONS ===== */
+
+@keyframes counterSlideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes goldLineGrow {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+/* ===== SCROLL ANIMATIONS ===== */
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== GALLERY LIGHTBOX ===== */
+
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.92);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== PROGRAMS WHEEL — RESPONSIVE SCALING ===== */
+
+@media (max-width: 639px) {
+  .wheel-scale-container {
+    transform: scale(0.78);
+    transform-origin: center center;
+  }
+}
+
+@media (max-width: 413px) {
+  .wheel-scale-container {
+    transform: scale(0.72);
+    transform-origin: center center;
+  }
+}
+
+@media (max-width: 374px) {
+  .wheel-scale-container {
+    transform: scale(0.62);
+    transform-origin: center center;
+  }
+}
+
+@media (max-width: 319px) {
+  .wheel-scale-container {
+    transform: scale(0.55);
+    transform-origin: center center;
+  }
+}
+
+/* ===== MOBILE SAFETY ===== */
+
+@media (max-width: 768px) {
+  .ticker-track {
+    animation-duration: 18s;
+  }
+
+  .clip-corner {
+    clip-path: none;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+}
+
+/* ===== SCROLLBAR STYLING ===== */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--navy-primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold);
+}
+
+/* ===== SELECTION ===== */
+
+::selection {
+  background: var(--gold);
+  color: white;
 }
