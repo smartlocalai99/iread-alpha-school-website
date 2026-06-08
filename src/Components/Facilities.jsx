@@ -1,121 +1,94 @@
 import { motion } from "framer-motion";
-
-// Mosaic directions — each card enters from a different direction
-const mosaicDirections = [
-  { x: 0, y: 60 },      // bottom
-  { x: 60, y: 0 },      // right
-  { x: -60, y: 0 },     // left
-  { x: 0, y: -60 },     // top
-  { x: 60, y: 60 },     // bottom-right diagonal
-  { x: -60, y: -60 },   // top-left diagonal
-];
+import { useRef, useEffect } from "react";
+import { gsap, ScrollTrigger } from "./useGsap";
 
 export default function FacilitiesSection() {
+  const sectionRef = useRef(null);
+  const headingRef = useRef(null);
+  const cardsContainerRef = useRef(null);
+
   const facilities = [
     {
       title: "Computer Lab",
+      desc: "Modern computers with latest software for digital learning.",
       image: "/future 3.jpg",
     },
     {
       title: "Well-Maintained Classrooms",
+      desc: "Spacious, ventilated classrooms with smart learning tools.",
       image: "/gallery-classroom.png",
     },
     {
       title: "Sports Area",
+      desc: "Dedicated grounds for athletics, team sports and physical fitness.",
       image: "/future 2.jpg",
     },
     {
       title: "Open-Air Auditorium",
+      desc: "A grand space for events, ceremonies and student performances.",
       image: "/facility-auditorium.png",
     },
     {
       title: "Cultural Activities",
+      desc: "Spaces for art, music, dance and creative expression.",
       image: "/cultural.png",
     },
     {
       title: "Safe Campus Environment",
+      desc: "Secure campus with CCTV and child-friendly infrastructure.",
       image: "/school-location.png",
     },
   ];
 
   return (
     <section id="facilities" className="max-w-[1450px] mx-auto px-5 sm:px-6 lg:px-8 py-16 md:py-20 lg:py-24">
-
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
         className="text-center mb-12 md:mb-16"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.6 }}
       >
-        <motion.p
-          className="text-[#C89B3C] tracking-[4px] font-semibold uppercase text-sm"
-          initial={{ opacity: 0, letterSpacing: "0px" }}
-          whileInView={{ opacity: 1, letterSpacing: "4px" }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-        >
+        <p className="text-[#C89B3C] tracking-[4px] font-semibold uppercase text-sm">
           Our Facilities
-        </motion.p>
+        </p>
 
-        <motion.h2
+        <h2
           className="text-3xl sm:text-4xl md:text-5xl lg:text-[56px] text-[#0B1F45] mt-4 leading-tight"
           style={{ fontFamily: "var(--font-serif)" }}
-          initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2 }}
         >
           Spaces Designed For
           <br className="hidden sm:block" />
           Learning & Growth
-        </motion.h2>
+        </h2>
 
-        <motion.p
-          className="text-gray-600 max-w-2xl mx-auto mt-5 md:mt-6 leading-7 md:leading-8 text-sm md:text-base"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-        >
+        <p className="text-gray-600 max-w-2xl mx-auto mt-5 md:mt-6 leading-7 md:leading-8 text-sm md:text-base">
           A supportive environment where students learn,
           explore, participate and develop with confidence.
-        </motion.p>
+        </p>
       </motion.div>
 
       <div className="grid lg:grid-cols-12 gap-5 md:gap-6">
-        {/* Large Featured Image — clip-path center-outward reveal */}
+        {/* Large Featured Image */}
         <motion.div
-          initial={{ opacity: 0, clipPath: "inset(50% 50% 50% 50%)" }}
-          whileInView={{ opacity: 1, clipPath: "inset(0% 0% 0% 0%)" }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }}
           className="lg:col-span-7 relative overflow-hidden rounded-[24px] md:rounded-[32px] group"
+          initial={{ opacity: 0, x: -40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7 }}
         >
           <img
             src="/high.png"
             alt="IREAD ALPHA Campus"
-            className="w-full h-[300px] sm:h-[400px] md:h-[520px] lg:h-[620px] object-cover object-center group-hover:scale-105 transition duration-700"
+            className="w-full h-[300px] sm:h-[400px] md:h-[520px] lg:h-full lg:min-h-[620px] object-cover object-center group-hover:scale-105 transition duration-700"
           />
 
           <div className="absolute inset-0 bg-gradient-to-t from-[#041C45]/90 via-[#041C45]/20 to-transparent" />
 
-          <motion.div
-            className="absolute bottom-0 left-0 p-6 sm:p-8 md:p-10 text-white"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.8 }}
-          >
-            <motion.p
-              className="text-[#C89B3C] uppercase tracking-[3px] mb-2 md:mb-3 text-xs md:text-sm"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 1 }}
-            >
+          <div className="absolute bottom-0 left-0 p-6 sm:p-8 md:p-10 text-white">
+            <p className="text-[#C89B3C] uppercase tracking-[3px] mb-2 md:mb-3 text-xs md:text-sm">
               Campus Environment
-            </motion.p>
+            </p>
 
             <h3
               className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight"
@@ -125,64 +98,44 @@ export default function FacilitiesSection() {
               <br />
               Inspiring Campus
             </h3>
-          </motion.div>
+          </div>
         </motion.div>
 
-        {/* Right Cards — mosaic tile assembly from different directions */}
-        <div className="lg:col-span-5 grid grid-cols-2 gap-4 md:gap-5">
-          {facilities.map((item, index) => {
-            const dir = mosaicDirections[index % mosaicDirections.length];
-            return (
-              <motion.div
-                key={index}
-                initial={{
-                  opacity: 0,
-                  x: dir.x,
-                  y: dir.y,
-                  scale: 0.8,
-                  rotate: (index % 2 === 0 ? -5 : 5),
-                }}
-                whileInView={{
-                  opacity: 1,
-                  x: 0,
-                  y: 0,
-                  scale: 1,
-                  rotate: 0,
-                }}
-                viewport={{ once: true }}
-                transition={{
-                  duration: 0.7,
-                  delay: 0.3 + index * 0.12,
-                  type: "spring",
-                  stiffness: 100,
-                  damping: 14,
-                }}
-                whileHover={{ scale: 1.05, rotate: 1, y: -5 }}
-                className="group relative overflow-hidden rounded-[18px] md:rounded-[24px] aspect-[4/3]"
-              >
+        {/* Right Cards with animated layout */}
+        <div className="lg:col-span-5 grid grid-cols-2 gap-4 md:gap-5 auto-rows-fr">
+          {facilities.map((item, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: index * 0.08 }}
+              className="facility-card group relative overflow-hidden rounded-[18px] md:rounded-[24px] cursor-pointer hover:scale-[1.03] hover:-translate-y-1 transition duration-300"
+            >
+              <div className="relative w-full h-full min-h-[140px] sm:min-h-[160px] md:min-h-[180px]">
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="w-full h-full object-cover object-center group-hover:scale-110 transition duration-700"
+                  className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition duration-700"
                 />
 
-                <div className="absolute inset-0 bg-gradient-to-t from-[#041C45]/80 via-[#041C45]/30 to-transparent" />
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#041C45]/80 via-[#041C45]/20 to-transparent group-hover:from-[#041C45]/90 group-hover:via-[#041C45]/40 transition-all duration-500" />
 
-                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5 text-white">
-                  <motion.div
-                    className="w-8 h-[3px] bg-[#C89B3C] mb-2 md:mb-3 group-hover:w-16 transition-all duration-500"
-                    initial={{ width: 0 }}
-                    whileInView={{ width: 32 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.5 + index * 0.12 }}
-                  />
+                {/* Content overlay */}
+                <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 md:p-5 text-white flex flex-col justify-end">
+                  <div className="w-8 h-[3px] bg-[#C89B3C] mb-2 md:mb-3 group-hover:w-16 transition-all duration-500" style={{ width: 32 }} />
                   <h3 className="text-sm sm:text-base md:text-lg font-semibold leading-tight">
                     {item.title}
                   </h3>
+                  {/* Description appears on hover */}
+                  <p className="text-white/0 group-hover:text-white/80 text-[10px] sm:text-xs mt-1 leading-relaxed transition-all duration-500 max-h-0 group-hover:max-h-20 overflow-hidden">
+                    {item.desc}
+                  </p>
                 </div>
-              </motion.div>
-            );
-          })}
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

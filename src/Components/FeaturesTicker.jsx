@@ -38,12 +38,22 @@ export default function FeaturesTicker() {
         {/* Shimmer shine pass overlay */}
         <div className="ticker-shimmer" />
 
-        <div className="ticker-track">
+        <motion.div
+          className="flex"
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{
+            ease: "linear",
+            duration: 30,
+            repeat: Infinity,
+            repeatType: "loop",
+          }}
+          style={{ width: "max-content" }}
+        >
           {items.map((item, index) => {
             const Icon = item.icon;
 
             return (
-              <div
+               <div
                 key={index}
                 className="flex items-center gap-3 md:gap-4 px-7 sm:px-9 md:px-11 py-5 md:py-7 shrink-0 border-r border-gray-200/70 group hover:bg-[#FBFAF7] transition-colors duration-300"
               >
@@ -62,7 +72,7 @@ export default function FeaturesTicker() {
               </div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </motion.section>
   );

@@ -1,6 +1,29 @@
 @import "tailwindcss";
 
-/* ===== COLOR SYSTEM (from Hero Section) ===== */
+/* ===== LENIS SMOOTH SCROLL ===== */
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* ===== COLOR SYSTEM ===== */
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -306,6 +329,20 @@ input:focus, textarea:focus {
   box-shadow: 0 0 0 3px rgba(200, 155, 60, 0.1);
 }
 
+/* ===== FOCUS-VISIBLE ACCESSIBILITY ===== */
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
 /* ===== WAVE RISE STAGGER ===== */
 
 @keyframes waveRise {
@@ -313,7 +350,7 @@ input:focus, textarea:focus {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ===== CONIC GRADIENT SPIN (Active wheel node) ===== */
+/* ===== CONIC GRADIENT SPIN ===== */
 
 @keyframes conicSpin {
   from { transform: rotate(0deg); }
@@ -403,4 +440,37 @@ input:focus, textarea:focus {
 ::selection {
   background: var(--gold);
   color: white;
+}
+
+/* ===== REDUCED MOTION ===== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .ticker-track {
+    animation: none;
+  }
+}
+
+/* ===== WILL-CHANGE HINTS ===== */
+
+.ticker-track {
+  will-change: transform;
+}
+
+/* ===== GSAP TEXT REVEAL UTILITIES ===== */
+
+[data-gsap-text] {
+  visibility: hidden;
+}
+
+[data-gsap-text].gsap-revealed {
+  visibility: visible;
 }

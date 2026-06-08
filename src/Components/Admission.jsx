@@ -111,15 +111,15 @@ export default function AdmissionsSection() {
           </motion.div>
 
           <motion.div
-            className="mt-8 md:mt-10 overflow-hidden rounded-[24px] md:rounded-[32px] group aspect-[16/10]"
+            className="mt-8 md:mt-10 overflow-hidden rounded-[24px] md:rounded-[32px] group w-full h-[220px] sm:h-[280px] lg:h-[340px] shadow-sm relative"
             initial={{ opacity: 0, y: 30, scale: 0.95 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.6, type: "spring", stiffness: 80 }}
           >
             <img
-              src="/pre.png"
-              alt="Admissions at IREAD ALPHA"
+              src="/Hero.jpeg"
+              alt="IREAD ALPHA English Medium High School Entrance and Name Board"
               className="w-full h-full object-cover object-center transition duration-700 group-hover:scale-105"
             />
           </motion.div>

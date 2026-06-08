@@ -35,7 +35,7 @@ export default function Footer() {
       {/* Top CTA — perspective tilt scale-in */}
       <div className="max-w-[1450px] mx-auto px-5 sm:px-6 lg:px-8 pt-16 md:pt-20">
         <motion.div
-          className="relative overflow-hidden rounded-[24px] md:rounded-[32px] bg-gradient-to-r from-[#0B1F45] to-[#12336B] p-8 sm:p-10 lg:p-14"
+          className="relative overflow-hidden rounded-[24px] md:rounded-[32px] bg-gradient-to-r from-[#0B1F45] to-[#12336B]"
           initial={{ opacity: 0, y: 50, rotateX: 8, scale: 0.95 }}
           whileInView={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
           viewport={{ once: true }}
@@ -46,68 +46,87 @@ export default function Footer() {
           <div className="absolute top-0 right-0 w-[200px] h-[200px] md:w-[300px] md:h-[300px] rounded-full bg-[#C89B3C]/5 -translate-y-1/2 translate-x-1/3" />
           <div className="absolute bottom-0 left-1/2 w-[150px] h-[150px] rounded-full bg-[#C89B3C]/3 translate-y-1/2" />
 
-          <div className="max-w-3xl relative z-10">
-            <motion.p
-              className="uppercase tracking-[4px] text-[#C89B3C] font-semibold text-xs md:text-sm"
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-            >
-              Admissions Open
-            </motion.p>
+          <div className="grid lg:grid-cols-[55%_45%] items-stretch">
+            {/* Left — Text content */}
+            <div className="relative z-10 p-8 sm:p-10 lg:p-14 flex flex-col justify-center">
+              <motion.p
+                className="uppercase tracking-[4px] text-[#C89B3C] font-semibold text-xs md:text-sm"
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+              >
+                Admissions Open
+              </motion.p>
 
-            <motion.h2
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl mt-3 md:mt-4 leading-tight"
-              style={{ fontFamily: "var(--font-serif)" }}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3, duration: 0.7 }}
-            >
-              Shape Your Child&apos;s
-              <br />
-              Future With Us
-            </motion.h2>
+              <motion.h2
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl mt-3 md:mt-4 leading-tight"
+                style={{ fontFamily: "var(--font-serif)" }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3, duration: 0.7 }}
+              >
+                Shape Your Child&apos;s
+                <br />
+                Future With Us
+              </motion.h2>
 
-            <motion.p
-              className="text-white/70 mt-4 md:mt-6 text-sm md:text-base lg:text-lg leading-7"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.5 }}
-            >
-              Empowering young minds with academic excellence,
-              leadership and lifelong values.
-            </motion.p>
+              <motion.p
+                className="text-white/70 mt-4 md:mt-6 text-sm md:text-base lg:text-lg leading-7 max-w-xl"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.5 }}
+              >
+                Empowering young minds with academic excellence,
+                leadership and lifelong values.
+              </motion.p>
 
+              <motion.div
+                className="flex flex-col sm:flex-row gap-3 mt-7 md:mt-8"
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.6 }}
+              >
+                <motion.a
+                  href="#admissions"
+                  onClick={(e) => handleNavClick(e, "#admissions")}
+                  className="bg-[#C89B3C] text-black px-7 py-3.5 rounded-xl font-semibold hover:bg-[#D4AD5A] hover:shadow-lg transition text-sm md:text-base text-center"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Apply Now
+                </motion.a>
+                <motion.button
+                  className="border border-white/20 px-7 py-3.5 rounded-xl hover:bg-white/10 transition text-sm md:text-base"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Download Prospectus
+                </motion.button>
+              </motion.div>
+            </div>
+
+            {/* Right — Student image */}
             <motion.div
-              className="flex flex-col sm:flex-row gap-3 mt-7 md:mt-8"
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              className="hidden lg:block relative w-full h-full min-h-[300px]"
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.6 }}
+              transition={{ delay: 0.4, duration: 0.8 }}
             >
-              <motion.a
-                href="#admissions"
-                onClick={(e) => handleNavClick(e, "#admissions")}
-                className="bg-[#C89B3C] text-black px-7 py-3.5 rounded-xl font-semibold hover:bg-[#D4AD5A] hover:shadow-lg transition text-sm md:text-base text-center"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Apply Now
-              </motion.a>
-              <motion.button
-                className="border border-white/20 px-7 py-3.5 rounded-xl hover:bg-white/10 transition text-sm md:text-base"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Download Prospectus
-              </motion.button>
+              <img
+                src="/admissions_students_banner.png"
+                alt="Students of IREAD ALPHA in school uniform"
+                className="w-full h-full object-cover object-center rounded-r-[24px] md:rounded-r-[32px]"
+              />
             </motion.div>
           </div>
         </motion.div>
       </div>
+
 
       {/* Main Footer — wave rise-up with staggered columns */}
       <div className="max-w-[1450px] mx-auto px-5 sm:px-6 lg:px-8 py-14 md:py-20">

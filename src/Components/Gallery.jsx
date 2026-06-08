@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ZoomIn } from "lucide-react";
+import { gsap, ScrollTrigger } from "./useGsap";
 
 const galleryItems = [
   { src: "/future 1.jpg", title: "Learning Together", category: "academics" },
@@ -28,23 +29,73 @@ const filters = [
 export default function GallerySection() {
   const [activeFilter, setActiveFilter] = useState("all");
   const [lightbox, setLightbox] = useState(null);
+  const headingRef = useRef(null);
 
   const filtered = activeFilter === "all"
     ? galleryItems
     : galleryItems.filter((item) => item.category === activeFilter);
 
+  // GSAP heading reveal
+  useEffect(() => {
+    if (typeof window === "undefined" || !headingRef.current) return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const el = headingRef.current;
+    const text = el.textContent;
+    el.innerHTML = "";
+    el.style.visibility = "visible";
+
+    const words = text.split(" ").map((word, i, arr) => {
+      const wrapper = document.createElement("span");
+      wrapper.style.display = "inline-block";
+      wrapper.style.overflow = "hidden";
+      wrapper.style.verticalAlign = "top";
+
+      const inner = document.createElement("span");
+      inner.textContent = word;
+      inner.style.display = "inline-block";
+      inner.style.transform = "translateY(110%)";
+
+      wrapper.appendChild(inner);
+      el.appendChild(wrapper);
+
+      if (i < arr.length - 1) {
+        el.appendChild(document.createTextNode("\u00A0"));
+      }
+
+      return inner;
+    });
+
+    const ctx = gsap.context(() => {
+      gsap.to(words, {
+        y: 0,
+        duration: 0.8,
+        stagger: 0.06,
+        ease: "power4.out",
+        scrollTrigger: {
+          trigger: el,
+          start: "top 85%",
+          once: true,
+        },
+      });
+    });
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section id="gallery" className="max-w-[1450px] mx-auto px-5 sm:px-6 lg:px-8 py-16 md:py-20 lg:py-24">
 
       {/* Header */}
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        className="text-center mb-10 md:mb-14"
-      >
-        <div className="flex justify-center items-center gap-3 mb-4">
+      <div className="text-center mb-10 md:mb-14">
+        <motion.div
+          className="flex justify-center items-center gap-3 mb-4"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
           <motion.div
             className="w-10 h-[2px] bg-[#C89B3C]"
             initial={{ width: 0 }}
@@ -62,18 +113,16 @@ export default function GallerySection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           />
-        </div>
+        </motion.div>
 
-        <motion.h2
+        {/* GSAP word reveal heading */}
+        <h2
+          ref={headingRef}
           className="text-3xl sm:text-4xl md:text-5xl lg:text-[56px] text-[#0B1F45]"
-          style={{ fontFamily: "var(--font-serif)" }}
-          initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          style={{ fontFamily: "var(--font-serif)", visibility: "hidden" }}
         >
           Life At IREAD ALPHA
-        </motion.h2>
+        </h2>
 
         <motion.p
           className="text-gray-600 max-w-2xl mx-auto mt-5 leading-7 md:leading-8 text-sm md:text-base"
@@ -85,9 +134,9 @@ export default function GallerySection() {
           Celebrating learning, achievements, creativity,
           leadership and unforgettable school memories.
         </motion.p>
-      </motion.div>
+      </div>
 
-      {/* Filter Tabs — pill morph */}
+      {/* Filter Tabs */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -118,7 +167,7 @@ export default function GallerySection() {
         ))}
       </motion.div>
 
-      {/* Gallery Grid — masonry pop-in with scale bounce and rotation */}
+      {/* Gallery Grid */}
       <motion.div
         layout
         className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-5"
@@ -181,7 +230,7 @@ export default function GallerySection() {
         </AnimatePresence>
       </motion.div>
 
-      {/* Lightbox — cinematic zoom */}
+      {/* Lightbox */}
       <AnimatePresence>
         {lightbox && (
           <motion.div
