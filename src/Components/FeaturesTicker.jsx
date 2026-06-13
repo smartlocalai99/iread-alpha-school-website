@@ -34,22 +34,32 @@ export default function FeaturesTicker() {
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
     >
-      <div className="max-w-[1450px] mx-auto bg-white rounded-2xl md:rounded-3xl shadow-lg overflow-hidden relative ticker-shimmer-container">
+      <div className=" bg-white rounded-2xl md:rounded-3xl shadow-lg overflow-hidden relative ticker-shimmer-container">
         {/* Shimmer shine pass overlay */}
         <div className="ticker-shimmer" />
 
-        <div className="ticker-track">
+        <motion.div
+          className="flex"
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{
+            ease: "linear",
+            duration: 30,
+            repeat: Infinity,
+            repeatType: "loop",
+          }}
+          style={{ width: "max-content" }}
+        >
           {items.map((item, index) => {
             const Icon = item.icon;
 
             return (
-              <div
+               <div
                 key={index}
                 className="flex items-center gap-3 md:gap-4 px-7 sm:px-9 md:px-11 py-5 md:py-7 shrink-0 border-r border-gray-200/70 group hover:bg-[#FBFAF7] transition-colors duration-300"
               >
                 <Icon
                   size={28}
-                  className="text-[#C89B3C] md:w-[34px] md:h-[34px] group-hover:scale-110 transition-transform duration-300"
+                  className="text-[#C89B3C] md:w-[34px] md:h-[34px] "
                   strokeWidth={1.8}
                 />
                 <span
@@ -62,7 +72,7 @@ export default function FeaturesTicker() {
               </div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </motion.section>
   );

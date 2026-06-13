@@ -13,7 +13,7 @@ import GallerySection from "@/Components/Gallery";
 import ContactSection from "@/Components/Contact";
 import Footer from "@/Components/Footer";
 
-export default function Home() {
+export default function Home({ isReady }) {
   return (
     <>
       <Head>
@@ -24,7 +24,7 @@ export default function Home() {
         />
       </Head>
 
-      <Navbar />
+      <Navbar isReady={isReady} />
       <Hero />
       <FeaturesTicker />
       <StatsSection />

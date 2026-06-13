@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ZoomIn } from "lucide-react";
+import { gsap, ScrollTrigger } from "./useGsap";
 
 const galleryItems = [
   { src: "/future 1.jpg", title: "Learning Together", category: "academics" },
@@ -28,29 +29,77 @@ const filters = [
 export default function GallerySection() {
   const [activeFilter, setActiveFilter] = useState("all");
   const [lightbox, setLightbox] = useState(null);
+  const headingRef = useRef(null);
 
   const filtered = activeFilter === "all"
     ? galleryItems
     : galleryItems.filter((item) => item.category === activeFilter);
 
+  // GSAP heading reveal
+  useEffect(() => {
+    if (typeof window === "undefined" || !headingRef.current) return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const el = headingRef.current;
+    const text = el.textContent;
+    el.innerHTML = "";
+    el.style.visibility = "visible";
+
+    const words = text.split(" ").map((word, i, arr) => {
+      const wrapper = document.createElement("span");
+      wrapper.style.display = "inline-block";
+      wrapper.style.overflow = "hidden";
+      wrapper.style.verticalAlign = "top";
+
+      const inner = document.createElement("span");
+      inner.textContent = word;
+      inner.style.display = "inline-block";
+      inner.style.transform = "translateY(110%)";
+
+      wrapper.appendChild(inner);
+      el.appendChild(wrapper);
+
+      if (i < arr.length - 1) {
+        el.appendChild(document.createTextNode("\u00A0"));
+      }
+
+      return inner;
+    });
+
+    const ctx = gsap.context(() => {
+      gsap.to(words, {
+        y: 0,
+        duration: 0.8,
+        stagger: 0.06,
+        ease: "power4.out",
+        scrollTrigger: {
+          trigger: el,
+          start: "top 85%",
+          once: true,
+        },
+      });
+    });
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section id="gallery" className="max-w-[1450px] mx-auto px-5 sm:px-6 lg:px-8 py-16 md:py-20 lg:py-24">
+    <section id="gallery" className="px-5 sm:px-6 lg:px-8 py-16 md:py-20 lg:py-24">
 
       {/* Header */}
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        className="text-center mb-10 md:mb-14"
-      >
-        <div className="flex justify-center items-center gap-3 mb-4">
+      <div className="text-center mb-10 md:mb-14">
+        <motion.div
+          className="flex justify-center items-center gap-3 mb-4"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+        >
           <motion.div
             className="w-10 h-[2px] bg-[#C89B3C]"
             initial={{ width: 0 }}
             whileInView={{ width: 40 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
           />
           <p className="text-[#C89B3C] uppercase tracking-[4px] font-semibold text-sm">
             Gallery
@@ -60,39 +109,34 @@ export default function GallerySection() {
             initial={{ width: 0 }}
             whileInView={{ width: 40 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
           />
-        </div>
+        </motion.div>
 
-        <motion.h2
+        {/* GSAP word reveal heading */}
+        <h2
+          ref={headingRef}
           className="text-3xl sm:text-4xl md:text-5xl lg:text-[56px] text-[#0B1F45]"
-          style={{ fontFamily: "var(--font-serif)" }}
-          initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          style={{ fontFamily: "var(--font-serif)", visibility: "hidden" }}
         >
           Life At IREAD ALPHA
-        </motion.h2>
+        </h2>
 
         <motion.p
           className="text-gray-600 max-w-2xl mx-auto mt-5 leading-7 md:leading-8 text-sm md:text-base"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
         >
           Celebrating learning, achievements, creativity,
           leadership and unforgettable school memories.
         </motion.p>
-      </motion.div>
+      </div>
 
-      {/* Filter Tabs — pill morph */}
+      {/* Filter Tabs */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.3 }}
         className="flex flex-wrap justify-center gap-2 md:gap-3 mb-8 md:mb-12"
       >
         {filters.map((filter, i) => (
@@ -102,14 +146,13 @@ export default function GallerySection() {
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.4 + i * 0.08, type: "spring", stiffness: 200 }}
             whileHover={{ scale: 1.08, y: -2 }}
             whileTap={{ scale: 0.95 }}
             className={`
-              px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all duration-300
+              px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-medium
               ${activeFilter === filter.value
                 ? "bg-[#0B2148] text-white shadow-lg"
-                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                : "bg-gray-100 text-gray-600"
               }
             `}
           >
@@ -118,7 +161,7 @@ export default function GallerySection() {
         ))}
       </motion.div>
 
-      {/* Gallery Grid — masonry pop-in with scale bounce and rotation */}
+      {/* Gallery Grid */}
       <motion.div
         layout
         className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-5"
@@ -144,23 +187,14 @@ export default function GallerySection() {
                 opacity: 0,
                 scale: 0.6,
                 rotate: (index % 2 === 0 ? 8 : -8),
-                transition: { duration: 0.3 },
               }}
-              transition={{
-                duration: 0.6,
-                delay: index * 0.05,
-                type: "spring",
-                stiffness: 120,
-                damping: 14,
-              }}
-              whileHover={{ scale: 1.05, rotate: 1, y: -5, zIndex: 10 }}
               className="group relative overflow-hidden rounded-[16px] md:rounded-[20px] cursor-pointer aspect-[4/3]"
               onClick={() => setLightbox(item)}
             >
               <img
                 src={item.src}
                 alt={item.title}
-                className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700"
+                className="w-full h-full object-cover object-center"
                 loading="lazy"
               />
 
@@ -181,7 +215,7 @@ export default function GallerySection() {
         </AnimatePresence>
       </motion.div>
 
-      {/* Lightbox — cinematic zoom */}
+      {/* Lightbox */}
       <AnimatePresence>
         {lightbox && (
           <motion.div
@@ -198,7 +232,6 @@ export default function GallerySection() {
               initial={{ scale: 0, rotate: -180 }}
               animate={{ scale: 1, rotate: 0 }}
               exit={{ scale: 0, rotate: 180 }}
-              transition={{ type: "spring", stiffness: 200 }}
             >
               <X size={22} />
             </motion.button>
@@ -207,7 +240,6 @@ export default function GallerySection() {
               initial={{ scale: 0.3, opacity: 0, rotateY: -30 }}
               animate={{ scale: 1, opacity: 1, rotateY: 0 }}
               exit={{ scale: 0.3, opacity: 0, rotateY: 30 }}
-              transition={{ duration: 0.5, type: "spring", stiffness: 100, damping: 15 }}
               onClick={(e) => e.stopPropagation()}
               className="max-w-5xl max-h-[85vh] w-full"
               style={{ perspective: "800px" }}
@@ -221,7 +253,6 @@ export default function GallerySection() {
                 className="text-center text-white/80 mt-4 text-lg font-medium"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
               >
                 {lightbox.title}
               </motion.p>

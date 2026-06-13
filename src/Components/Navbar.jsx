@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
-export default function Navbar() {
+export default function Navbar({ isReady }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -50,16 +50,16 @@ export default function Navbar() {
   return (
     <>
       <motion.header
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
+        initial={{ y: -120, opacity: 0 }}
+        animate={isReady ? { y: 0, opacity: 1 } : { y: -120, opacity: 0 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         className={`sticky top-0 z-50 transition-all duration-300 ${
           scrolled
             ? "bg-white/98 backdrop-blur-md shadow-lg border-b border-gray-100"
             : "bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm"
         }`}
       >
-        <div className="max-w-[1450px] mx-auto h-[80px] md:h-[90px] px-5 sm:px-6 lg:px-10 flex items-center justify-between">
+        <div className="h-[80px] md:h-[90px] px-5 sm:px-6 lg:px-10 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 shrink-0">
             <img

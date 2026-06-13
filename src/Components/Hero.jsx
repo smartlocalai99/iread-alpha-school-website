@@ -1,90 +1,59 @@
 import { motion } from "framer-motion";
+import { useRef, useEffect } from "react";
+import { gsap, ScrollTrigger } from "./useGsap";
 
 export default function Hero() {
   return (
     <section className="relative bg-white">
       <div className="grid lg:grid-cols-[48%_52%] lg:min-h-[620px]">
 
-        {/* LEFT — Cinematic stagger reveal */}
+        {/* LEFT — Cinematic layout with animations */}
         <div className="flex items-center bg-white z-10">
-          <div className="max-w-[760px] px-6 sm:px-8 lg:px-14 py-10">
+          <div className="px-6 sm:px-8 lg:px-14 py-6 lg:py-8 flex flex-col justify-center">
 
             <motion.p
-              initial={{ opacity: 0, x: -50, filter: "blur(8px)" }}
-              animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-              transition={{ duration: 0.7, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="text-[#C89B3C] tracking-[4px] font-semibold mb-4 text-sm sm:text-base"
+              className="text-[#C89B3C] tracking-[4px] font-semibold mb-3 text-sm sm:text-base"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
             >
               WELCOME TO
             </motion.p>
 
             <motion.h1
-              initial={{ opacity: 0, y: 60, filter: "blur(12px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ duration: 1, delay: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
               className="text-[#0B2148] leading-[1.08] text-[32px] sm:text-[42px] md:text-[46px] lg:text-[54px]"
               style={{ fontFamily: "var(--font-serif)" }}
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
             >
-              <motion.span
-                className="inline-block"
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.6 }}
-              >
+              <span className="inline-block">
                 IREAD ALPHA
-              </motion.span>
+              </span>
               <br />
-              <motion.span
-                className="inline-block"
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.75 }}
-              >
+              <span className="inline-block">
                 ENGLISH MEDIUM
-              </motion.span>
+              </span>
               <br />
-              <motion.span
-                className="inline-block text-[#C89B3C]"
-                initial={{ opacity: 0, y: 40, scale: 0.9 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ duration: 0.8, delay: 0.9, type: "spring", stiffness: 100 }}
-              >
+              <span className="inline-block text-[#C89B3C]">
                 HIGH SCHOOL
-              </motion.span>
+              </span>
             </motion.h1>
 
-            {/* Divider — SVG stroke draw animation */}
+            {/* Divider */}
             <motion.div
-              initial={{ opacity: 0, scaleX: 0 }}
-              animate={{ opacity: 1, scaleX: 1 }}
-              transition={{ duration: 0.7, delay: 1.1, ease: [0.76, 0, 0.24, 1] }}
-              className="flex items-center gap-4 mt-6 origin-left"
+              className="flex items-center gap-4 mt-4 origin-left"
+              initial={{ scaleX: 0, opacity: 0 }}
+              animate={{ scaleX: 1, opacity: 1 }}
             >
-              <motion.div
-                className="w-12 h-[2px] bg-[#C89B3C]"
-                initial={{ width: 0 }}
-                animate={{ width: 48 }}
-                transition={{ duration: 0.6, delay: 1.2 }}
-              />
-              <motion.div
-                className="w-3 h-3 rotate-45 border border-[#C89B3C]"
-                initial={{ scale: 0, rotate: 0 }}
-                animate={{ scale: 1, rotate: 45 }}
-                transition={{ duration: 0.5, delay: 1.3, type: "spring", stiffness: 200 }}
-              />
-              <motion.div
-                className="w-12 h-[2px] bg-[#C89B3C]"
-                initial={{ width: 0 }}
-                animate={{ width: 48 }}
-                transition={{ duration: 0.6, delay: 1.4 }}
-              />
+              <div className="w-12 h-[2px] bg-[#C89B3C]" style={{ width: 48 }} />
+              <div className="w-3 h-3 rotate-45 border border-[#C89B3C]" />
+              <div className="w-12 h-[2px] bg-[#C89B3C]" style={{ width: 48 }} />
             </motion.div>
 
             <motion.h3
-              initial={{ opacity: 0, y: 30, filter: "blur(6px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ duration: 0.7, delay: 1.3 }}
-              className="mt-6 text-[18px] sm:text-[22px] md:text-[26px] leading-tight text-gray-800"
+              className="mt-4 text-[18px] sm:text-[22px] md:text-[26px] leading-tight text-gray-800"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
             >
               Building Strong Foundations
               <br />
@@ -92,10 +61,9 @@ export default function Hero() {
             </motion.h3>
 
             <motion.p
-              initial={{ opacity: 0, y: 25 }}
+              className="mt-4 text-gray-600 text-[14px] sm:text-[16px] md:text-[17px] leading-7 sm:leading-8 max-w-[560px]"
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 1.5 }}
-              className="mt-5 text-gray-600 text-[14px] sm:text-[16px] md:text-[17px] leading-7 sm:leading-8 max-w-[560px]"
             >
               Where every student is encouraged to learn,
               grow, and succeed with confidence, character
@@ -104,77 +72,87 @@ export default function Hero() {
 
             {/* Buttons */}
             <motion.div
-              initial={{ opacity: 0, y: 25 }}
+              className="flex flex-col xs:flex-row flex-wrap gap-3 mt-6"
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 1.7 }}
-              className="flex flex-col xs:flex-row flex-wrap gap-3 mt-8"
             >
-              <motion.a
+              <a
                 href="#admissions"
                 className="bg-[#052A63] text-white px-6 py-3 rounded-xl font-medium hover:bg-[#0B2148] hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-sm sm:text-base text-center"
-                whileHover={{ scale: 1.03, y: -2 }}
-                whileTap={{ scale: 0.97 }}
               >
                 Apply For Admission
-              </motion.a>
+              </a>
 
-              <motion.a
+              <a
                 href="#about"
                 className="border border-[#C89B3C] text-[#C89B3C] px-6 py-3 rounded-xl font-medium hover:bg-[#C89B3C] hover:text-white hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-sm sm:text-base text-center"
-                whileHover={{ scale: 1.03, y: -2 }}
-                whileTap={{ scale: 0.97 }}
               >
                 Explore Our School
-              </motion.a>
+              </a>
             </motion.div>
 
             {/* Features */}
             <motion.div
+              className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 mt-6 text-sm sm:text-base font-medium text-[#0B2148]"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 1.9 }}
-              className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 mt-8 text-sm sm:text-base font-medium text-[#0B2148] pb-4"
             >
               {[
                 "Experienced Faculty",
                 "Safe Environment",
                 "Academic Excellence",
-              ].map((feature, i) => (
-                <motion.div
-                  key={feature}
-                  initial={{ opacity: 0, x: -20, filter: "blur(4px)" }}
-                  animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-                  transition={{ delay: 2.0 + i * 0.15, duration: 0.5 }}
-                  className="flex items-center gap-2"
-                >
-                  <motion.div
-                    className="w-2 h-2 rounded-full bg-[#C89B3C] shrink-0"
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ delay: 2.1 + i * 0.15, type: "spring", stiffness: 300 }}
-                  />
+              ].map((feature) => (
+                <div key={feature} className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-[#C89B3C] shrink-0" />
                   <span>{feature}</span>
-                </motion.div>
+                </div>
+              ))}
+            </motion.div>
+
+            {/* Trust Indicators */}
+            <motion.div
+              className="flex flex-wrap items-center gap-4 sm:gap-6 mt-6 pt-4 border-t border-gray-100"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              {[
+                { value: "10+", label: "Years" },
+                { value: "1500+", label: "Students" },
+                { value: "Govt.", label: "Recognised" },
+              ].map((item, i) => (
+                <div key={item.label} className="flex items-center gap-2">
+                  <span
+                    className="text-[#C89B3C] text-xl sm:text-2xl font-bold"
+                    style={{ fontFamily: "var(--font-serif)" }}
+                  >
+                    {item.value}
+                  </span>
+                  <span className="text-gray-500 text-xs sm:text-sm font-medium">{item.label}</span>
+                  {i < 2 && (
+                    <div className="w-px h-6 bg-gray-200 ml-2 sm:ml-4 hidden sm:block" />
+                  )}
+                </div>
               ))}
             </motion.div>
 
           </div>
         </div>
 
-        {/* RIGHT IMAGE — Ken Burns zoom with parallax */}
-        <motion.div
-          initial={{ opacity: 0, clipPath: "inset(0 100% 0 0)" }}
-          animate={{ opacity: 1, clipPath: "inset(0 0% 0 0)" }}
-          transition={{ duration: 1.4, delay: 0.4, ease: [0.76, 0, 0.24, 1] }}
-          className="relative min-h-[320px] sm:min-h-[450px] lg:min-h-[620px] overflow-hidden"
-        >
+        {/* RIGHT IMAGE — object-cover fills entire container */}
+        <div className="relative min-h-[400px] sm:min-h-[550px] lg:min-h-full lg:h-full overflow-hidden bg-[#0B2148]">
           <motion.img
             src="/Hero.jpeg"
             alt="IREAD ALPHA English Medium High School Campus"
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{ objectPosition: "40% center" }}
-            animate={{ scale: [1, 1.05, 1] }}
-            transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute inset-0"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "50% center",
+              userSelect: "none"
+            }}
+            initial={{ opacity: 0, scale: 1.05 }}
+            animate={{ opacity: 1, scale: 1 }}
           />
 
           {/* Soft Blend */}
@@ -187,27 +165,9 @@ export default function Hero() {
           />
 
           {/* Top red ornamental band */}
-          <motion.div
-            className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#8B1A1A] via-[#C89B3C] to-[#8B1A1A] opacity-60"
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 1, delay: 1.2, ease: [0.76, 0, 0.24, 1] }}
-            style={{ transformOrigin: "left" }}
-          />
-        </motion.div>
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#8B1A1A] via-[#C89B3C] to-[#8B1A1A] opacity-60" />
+        </div>
 
-      </div>
-
-      {/* Bottom Curve */}
-      <div className="absolute bottom-0 left-0 w-full z-20">
-        <svg
-          viewBox="0 0 1440 100"
-          className="w-full"
-          fill="white"
-          preserveAspectRatio="none"
-        >
-          <path d="M0,70 C250,25 500,25 720,70 C950,115 1180,25 1440,70 L1440,100 L0,100 Z" />
-        </svg>
       </div>
 
     </section>
