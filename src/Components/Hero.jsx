@@ -9,7 +9,7 @@ export default function Hero() {
 
         {/* LEFT — Cinematic layout with animations */}
         <div className="flex items-center bg-white z-10">
-          <div className="max-w-[760px] px-6 sm:px-8 lg:px-14 py-6 lg:py-8 flex flex-col justify-center">
+          <div className="px-6 sm:px-8 lg:px-14 py-6 lg:py-8 flex flex-col justify-center">
 
             <motion.p
               className="text-[#C89B3C] tracking-[4px] font-semibold mb-3 text-sm sm:text-base"
@@ -25,7 +25,6 @@ export default function Hero() {
               style={{ fontFamily: "var(--font-serif)" }}
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
             >
               <span className="inline-block">
                 IREAD ALPHA
@@ -45,7 +44,6 @@ export default function Hero() {
               className="flex items-center gap-4 mt-4 origin-left"
               initial={{ scaleX: 0, opacity: 0 }}
               animate={{ scaleX: 1, opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
             >
               <div className="w-12 h-[2px] bg-[#C89B3C]" style={{ width: 48 }} />
               <div className="w-3 h-3 rotate-45 border border-[#C89B3C]" />
@@ -56,7 +54,6 @@ export default function Hero() {
               className="mt-4 text-[18px] sm:text-[22px] md:text-[26px] leading-tight text-gray-800"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
             >
               Building Strong Foundations
               <br />
@@ -67,7 +64,6 @@ export default function Hero() {
               className="mt-4 text-gray-600 text-[14px] sm:text-[16px] md:text-[17px] leading-7 sm:leading-8 max-w-[560px]"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
             >
               Where every student is encouraged to learn,
               grow, and succeed with confidence, character
@@ -79,7 +75,6 @@ export default function Hero() {
               className="flex flex-col xs:flex-row flex-wrap gap-3 mt-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.7 }}
             >
               <a
                 href="#admissions"
@@ -101,7 +96,6 @@ export default function Hero() {
               className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 mt-6 text-sm sm:text-base font-medium text-[#0B2148]"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
             >
               {[
                 "Experienced Faculty",
@@ -120,7 +114,6 @@ export default function Hero() {
               className="flex flex-wrap items-center gap-4 sm:gap-6 mt-6 pt-4 border-t border-gray-100"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.9 }}
             >
               {[
                 { value: "10+", label: "Years" },
@@ -160,7 +153,6 @@ export default function Hero() {
             }}
             initial={{ opacity: 0, scale: 1.05 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.0, ease: "easeOut" }}
           />
 
           {/* Soft Blend */}

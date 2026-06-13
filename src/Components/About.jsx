@@ -6,7 +6,7 @@ import { gsap, ScrollTrigger } from "./useGsap";
 
 export default function AboutSection() {
   return (
-    <section id="about" className="max-w-[1450px] mx-auto px-5 sm:px-6 lg:px-8 py-16 md:py-20 lg:py-24">
+    <section id="about" className="px-5 sm:px-6 lg:px-8 py-16 md:py-20 lg:py-24">
       <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-center">
 
         {/* LEFT IMAGES — animated slide-in layout */}
@@ -14,14 +14,13 @@ export default function AboutSection() {
           initial={{ opacity: 0, x: -40 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.7 }}
         >
           {/* Main image with rounded corners */}
           <div className="overflow-hidden rounded-3xl mb-5 group aspect-[16/10]">
             <img
               src="/future 1.jpg"
               alt="Students learning at IREAD ALPHA"
-              className="w-full h-full object-cover object-center group-hover:scale-105 transition duration-700"
+              className="w-full h-full object-cover object-center "
             />
           </div>
 
@@ -30,7 +29,7 @@ export default function AboutSection() {
               <img
                 src="/future 2.jpg"
                 alt="Campus activities"
-                className="w-full h-full object-cover object-center group-hover:scale-105 transition duration-700"
+                className="w-full h-full object-cover object-center"
               />
             </div>
 
@@ -38,7 +37,7 @@ export default function AboutSection() {
               <img
                 src="/future 3.jpg"
                 alt="Student achievements"
-                className="w-full h-full object-cover object-center group-hover:scale-105 transition duration-700"
+                className="w-full h-full object-cover object-center"
               />
             </div>
           </div>
@@ -49,7 +48,6 @@ export default function AboutSection() {
           initial={{ opacity: 0, x: 40 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.7 }}
         >
           <div className="flex items-center gap-3 mb-4">
             <div className="w-8 h-[2px] bg-[#C89B3C]" style={{ width: 32 }} />
@@ -97,8 +95,8 @@ export default function AboutSection() {
             </div>
 
             {/* CARD 2 */}
-            <div className="group bg-white border border-gray-100 rounded-3xl p-5 sm:p-6 md:p-7 shadow-sm hover:shadow-xl transition-all duration-500">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-2xl bg-[#C89B3C] text-white flex items-center justify-center mb-4 md:mb-5 group-hover:bg-[#0B1F45] transition duration-500">
+            <div className="group bg-white border border-gray-100 rounded-3xl p-5 sm:p-6 md:p-7 ">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-2xl bg-[#C89B3C] text-white flex items-center justify-center mb-4 md:mb-5">
                 <Award size={24} strokeWidth={1.8} />
               </div>
 

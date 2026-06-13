@@ -46,7 +46,7 @@ export default function ContactSection() {
   }, []);
 
   return (
-    <section id="contact" className="max-w-[1450px] mx-auto px-5 sm:px-6 lg:px-8 pt-16 pb-8 md:pt-20 md:pb-10 lg:pt-24 lg:pb-12">
+    <section id="contact" className="px-5 sm:px-6 lg:px-8 pt-16 pb-8 md:pt-20 md:pb-10 lg:pt-24 lg:pb-12">
 
       <div className="text-center mb-12 md:mb-16">
         <motion.div
@@ -89,7 +89,6 @@ export default function ContactSection() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
         >
           We welcome parents and students to visit our campus,
           explore our facilities and experience the IREAD ALPHA
@@ -120,7 +119,6 @@ export default function ContactSection() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
             >
               Contact Information
             </motion.h3>
@@ -180,17 +178,9 @@ export default function ContactSection() {
                     initial={{ opacity: 0, x: -30 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
-                    transition={{
-                      duration: 0.5,
-                      delay: 0.4 + i * 0.12,
-                      type: "spring",
-                      stiffness: 100,
-                    }}
                   >
                     <motion.div
                       className="w-10 h-10 md:w-11 md:h-11 rounded-xl bg-[#C89B3C]/15 flex items-center justify-center shrink-0 mt-0.5"
-                      whileHover={{ scale: 1.15, rotate: 10 }}
-                      transition={{ type: "spring", stiffness: 300 }}
                     >
                       <Icon size={18} className="text-[#C89B3C]" />
                     </motion.div>
@@ -216,8 +206,6 @@ export default function ContactSection() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.9 }}
-              whileHover={{ x: 5 }}
             >
               <MapPin size={16} />
               <span>Open in Google Maps →</span>
@@ -229,7 +217,6 @@ export default function ContactSection() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.8 }}
             >
               <h4 className="text-[#C89B3C] uppercase tracking-[2px] text-[11px] font-bold mb-2">
                 Visitor Guidelines
@@ -252,7 +239,6 @@ export default function ContactSection() {
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 0.9, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: 1.0 }}
             >
               <img
                 src="/logo.png"
@@ -279,7 +265,6 @@ export default function ContactSection() {
           initial={{ opacity: 0, x: 40 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.2 }}
           className="space-y-6"
         >
           {/* School Location Image */}
@@ -288,12 +273,11 @@ export default function ContactSection() {
             initial={{ opacity: 0, y: 30, scale: 0.95 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.3, type: "spring", stiffness: 80 }}
           >
             <img
               src="/school-location.png"
               alt="IREAD ALPHA E.M. High School — Shahipet, Guduru, Andhra Pradesh"
-              className="w-full h-full object-cover object-center group-hover:scale-105 transition duration-700"
+              className="w-full h-full object-cover object-center"
             />
           </motion.div>
 
@@ -303,7 +287,6 @@ export default function ContactSection() {
             initial={{ opacity: 0, y: 30, scale: 0.95 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.5, type: "spring", stiffness: 80 }}
           >
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3862.8560456037794!2d78.8166756!3d14.4929521!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb371f2dbffff99%3A0x4746925333e5b711!2sAlfa%20E.M.%26islamic%20High%20School!5e0!3m2!1sen!2sin!4v1780752747740!5m2!1sen!2sin"
@@ -323,7 +306,6 @@ export default function ContactSection() {
             initial={{ opacity: 0, y: 30, scale: 0.95 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.7, type: "spring", stiffness: 80 }}
           >
             <h3
               className="text-xl md:text-2xl lg:text-3xl text-[#0B1F45] mb-6 md:mb-8"
@@ -342,7 +324,6 @@ export default function ContactSection() {
                   initial={{ opacity: 0, y: 15 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: 0.8 + i * 0.1 }}
                 />
               ))}
             </div>
@@ -350,11 +331,10 @@ export default function ContactSection() {
             <motion.textarea
               rows={4}
               placeholder="Message"
-              className="w-full border border-gray-200 rounded-xl px-4 md:px-5 py-3 md:py-4 mt-4 md:mt-5 outline-none focus:border-[#C89B3C] focus:shadow-[0_0_0_3px_rgba(200,155,60,0.1)] transition-all duration-300 resize-none text-sm md:text-base"
+              className="w-full border border-gray-200 rounded-xl px-4 md:px-5 py-3 md:py-4 mt-4 md:mt-5 outline-none focus:border-[#C89B3C] focus:shadow-[0_0_0_3px_rgba(200,155,60,0.1)] resize-none text-sm md:text-base"
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 1.2 }}
             />
 
             <motion.button
@@ -364,7 +344,6 @@ export default function ContactSection() {
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 1.3 }}
             >
               Send Enquiry
             </motion.button>

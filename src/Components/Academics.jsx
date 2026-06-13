@@ -31,14 +31,13 @@ export default function AcademicsSection() {
   ];
 
   return (
-    <section id="academics" className="max-w-[1450px] mx-auto px-5 sm:px-6 lg:px-8 py-16 md:py-20 lg:py-24">
+    <section id="academics" className="px-5 sm:px-6 lg:px-8 py-16 md:py-20 lg:py-24">
 
       <motion.div
         className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5 md:gap-6 mb-10 md:mb-14"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-50px" }}
-        transition={{ duration: 0.6 }}
       >
         <div>
           <p className="text-[#C89B3C] tracking-[3px] font-semibold uppercase text-sm">
@@ -55,7 +54,7 @@ export default function AcademicsSection() {
 
         <a
           href="#admissions"
-          className="border border-gray-300 px-6 py-3.5 rounded-xl hover:border-[#C89B3C] hover:text-[#C89B3C] transition duration-300 text-sm md:text-base w-full sm:w-auto text-center"
+          className="border border-gray-300 px-6 py-3.5 rounded-xl text-sm md:text-base w-full sm:w-auto text-center"
         >
           Apply For Admission →
         </a>
@@ -69,14 +68,13 @@ export default function AcademicsSection() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="academic-card group bg-white rounded-[24px] md:rounded-[28px] overflow-hidden border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
+            className="academic-card group bg-white rounded-[24px] md:rounded-[28px] overflow-hidden border border-gray-100 shadow-sm"
           >
             <div className="overflow-hidden relative aspect-[16/11]">
               <img
                 src={item.image}
                 alt={item.title}
-                className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700"
+                className="w-full h-full object-cover object-center"
               />
               {/* Grade badge */}
               <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-[#0B2148]/80 backdrop-blur-sm text-white text-[10px] sm:text-xs font-semibold px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg">

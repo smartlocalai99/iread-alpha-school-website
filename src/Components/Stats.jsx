@@ -39,13 +39,12 @@ export default function StatsSection() {
   ];
 
   return (
-    <section ref={ref} className="max-w-[1450px] mx-auto px-5 sm:px-6 lg:px-8 py-12 md:py-16">
+    <section ref={ref} className="px-5 sm:px-6 lg:px-8 py-12 md:py-16">
       <motion.div
-        className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-0 overflow-hidden rounded-[24px] md:rounded-[32px] border border-[#EAEAEA] bg-white shadow-sm"
+        className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-0 overflow-hidden border border-[#EAEAEA] bg-white shadow-sm"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.6 }}
       >
         {stats.map((item, index) => (
           <div
@@ -59,8 +58,6 @@ export default function StatsSection() {
               border-r
               border-[#EFEFEF]
               overflow-hidden
-              transition-all
-              duration-500
               ${index === stats.length - 1 ? "border-r-0 col-span-2 sm:col-span-1" : ""}
               ${index === stats.length - 2 ? "border-r-0 sm:border-r" : ""}
             `}
@@ -87,7 +84,7 @@ export default function StatsSection() {
             </h3>
 
             {/* Gold Divider (static for simplicity and speed) */}
-            <div className="mt-3 sm:mt-4 md:mt-5 h-[3px] bg-[#C89B3C] rounded-full w-10 group-hover:w-20 md:group-hover:w-24 transition-all duration-500" />
+            <div className="mt-3 sm:mt-4 md:mt-5 h-[3px] bg-[#C89B3C] rounded-full w-10" />
 
             {/* Title */}
             <p className="mt-3 sm:mt-4 md:mt-5 text-gray-600 font-medium leading-6 md:leading-7 text-xs sm:text-sm md:text-base">

@@ -85,7 +85,7 @@ export default function GallerySection() {
   }, []);
 
   return (
-    <section id="gallery" className="max-w-[1450px] mx-auto px-5 sm:px-6 lg:px-8 py-16 md:py-20 lg:py-24">
+    <section id="gallery" className="px-5 sm:px-6 lg:px-8 py-16 md:py-20 lg:py-24">
 
       {/* Header */}
       <div className="text-center mb-10 md:mb-14">
@@ -94,14 +94,12 @@ export default function GallerySection() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
         >
           <motion.div
             className="w-10 h-[2px] bg-[#C89B3C]"
             initial={{ width: 0 }}
             whileInView={{ width: 40 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
           />
           <p className="text-[#C89B3C] uppercase tracking-[4px] font-semibold text-sm">
             Gallery
@@ -111,7 +109,6 @@ export default function GallerySection() {
             initial={{ width: 0 }}
             whileInView={{ width: 40 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
           />
         </motion.div>
 
@@ -129,7 +126,6 @@ export default function GallerySection() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
         >
           Celebrating learning, achievements, creativity,
           leadership and unforgettable school memories.
@@ -141,7 +137,6 @@ export default function GallerySection() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.3 }}
         className="flex flex-wrap justify-center gap-2 md:gap-3 mb-8 md:mb-12"
       >
         {filters.map((filter, i) => (
@@ -151,14 +146,13 @@ export default function GallerySection() {
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.4 + i * 0.08, type: "spring", stiffness: 200 }}
             whileHover={{ scale: 1.08, y: -2 }}
             whileTap={{ scale: 0.95 }}
             className={`
-              px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all duration-300
+              px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-medium
               ${activeFilter === filter.value
                 ? "bg-[#0B2148] text-white shadow-lg"
-                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                : "bg-gray-100 text-gray-600"
               }
             `}
           >
@@ -193,23 +187,14 @@ export default function GallerySection() {
                 opacity: 0,
                 scale: 0.6,
                 rotate: (index % 2 === 0 ? 8 : -8),
-                transition: { duration: 0.3 },
               }}
-              transition={{
-                duration: 0.6,
-                delay: index * 0.05,
-                type: "spring",
-                stiffness: 120,
-                damping: 14,
-              }}
-              whileHover={{ scale: 1.05, rotate: 1, y: -5, zIndex: 10 }}
               className="group relative overflow-hidden rounded-[16px] md:rounded-[20px] cursor-pointer aspect-[4/3]"
               onClick={() => setLightbox(item)}
             >
               <img
                 src={item.src}
                 alt={item.title}
-                className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700"
+                className="w-full h-full object-cover object-center"
                 loading="lazy"
               />
 
@@ -247,7 +232,6 @@ export default function GallerySection() {
               initial={{ scale: 0, rotate: -180 }}
               animate={{ scale: 1, rotate: 0 }}
               exit={{ scale: 0, rotate: 180 }}
-              transition={{ type: "spring", stiffness: 200 }}
             >
               <X size={22} />
             </motion.button>
@@ -256,7 +240,6 @@ export default function GallerySection() {
               initial={{ scale: 0.3, opacity: 0, rotateY: -30 }}
               animate={{ scale: 1, opacity: 1, rotateY: 0 }}
               exit={{ scale: 0.3, opacity: 0, rotateY: 30 }}
-              transition={{ duration: 0.5, type: "spring", stiffness: 100, damping: 15 }}
               onClick={(e) => e.stopPropagation()}
               className="max-w-5xl max-h-[85vh] w-full"
               style={{ perspective: "800px" }}
@@ -270,7 +253,6 @@ export default function GallerySection() {
                 className="text-center text-white/80 mt-4 text-lg font-medium"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
               >
                 {lightbox.title}
               </motion.p>

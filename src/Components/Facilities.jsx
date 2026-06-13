@@ -10,27 +10,22 @@ export default function FacilitiesSection() {
   const facilities = [
     {
       title: "Computer Lab",
-      desc: "Modern computers with latest software for digital learning.",
       image: "/future 3.jpg",
     },
     {
       title: "Well-Maintained Classrooms",
-      desc: "Spacious, ventilated classrooms with smart learning tools.",
       image: "/gallery-classroom.png",
     },
     {
       title: "Sports Area",
-      desc: "Dedicated grounds for athletics, team sports and physical fitness.",
       image: "/future 2.jpg",
     },
     {
       title: "Open-Air Auditorium",
-      desc: "A grand space for events, ceremonies and student performances.",
       image: "/facility-auditorium.png",
     },
     {
       title: "Cultural Activities",
-      desc: "Spaces for art, music, dance and creative expression.",
       image: "/cultural.png",
     },
     {
@@ -41,13 +36,12 @@ export default function FacilitiesSection() {
   ];
 
   return (
-    <section id="facilities" className="max-w-[1450px] mx-auto px-5 sm:px-6 lg:px-8 py-16 md:py-20 lg:py-24">
+    <section id="facilities" className="px-5 sm:px-6 lg:px-8 py-16 md:py-20 lg:py-24">
       <motion.div
         className="text-center mb-12 md:mb-16"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-50px" }}
-        transition={{ duration: 0.6 }}
       >
         <p className="text-[#C89B3C] tracking-[4px] font-semibold uppercase text-sm">
           Our Facilities
@@ -75,12 +69,11 @@ export default function FacilitiesSection() {
           initial={{ opacity: 0, x: -40 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.7 }}
         >
           <img
             src="/high.png"
             alt="IREAD ALPHA Campus"
-            className="w-full h-[300px] sm:h-[400px] md:h-[520px] lg:h-full lg:min-h-[620px] object-cover object-center group-hover:scale-105 transition duration-700"
+            className="w-full h-[300px] sm:h-[400px] md:h-[520px] lg:h-full lg:min-h-[620px] object-cover object-center"
           />
 
           <div className="absolute inset-0 bg-gradient-to-t from-[#041C45]/90 via-[#041C45]/20 to-transparent" />
@@ -109,27 +102,26 @@ export default function FacilitiesSection() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: index * 0.08 }}
-              className="facility-card group relative overflow-hidden rounded-[18px] md:rounded-[24px] cursor-pointer hover:scale-[1.03] hover:-translate-y-1 transition duration-300"
+              className="facility-card group relative overflow-hidden rounded-[18px] md:rounded-[24px] cursor-pointer"
             >
               <div className="relative w-full h-full min-h-[140px] sm:min-h-[160px] md:min-h-[180px]">
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition duration-700"
+                  className="absolute inset-0 w-full h-full object-cover object-center"
                 />
 
                 {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#041C45]/80 via-[#041C45]/20 to-transparent group-hover:from-[#041C45]/90 group-hover:via-[#041C45]/40 transition-all duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#041C45]/80 via-[#041C45]/20 to-transparent" />
 
                 {/* Content overlay */}
                 <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 md:p-5 text-white flex flex-col justify-end">
-                  <div className="w-8 h-[3px] bg-[#C89B3C] mb-2 md:mb-3 group-hover:w-16 transition-all duration-500" style={{ width: 32 }} />
+                  <div className="w-8 h-[3px] bg-[#C89B3C] mb-2 md:mb-3 " style={{ width: 32 }} />
                   <h3 className="text-sm sm:text-base md:text-lg font-semibold leading-tight">
                     {item.title}
                   </h3>
                   {/* Description appears on hover */}
-                  <p className="text-white/0 group-hover:text-white/80 text-[10px] sm:text-xs mt-1 leading-relaxed transition-all duration-500 max-h-0 group-hover:max-h-20 overflow-hidden">
+                  <p className="text-white/0overflow-hidden">
                     {item.desc}
                   </p>
                 </div>

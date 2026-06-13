@@ -15,7 +15,7 @@ export default function LeadershipManifesto() {
         </h1>
       </div>
 
-      <div className="relative z-10 max-w-[1450px] mx-auto px-5 sm:px-6 lg:px-8">
+      <div className="relative z-10 px-5 sm:px-6 lg:px-8">
 
         {/* Heading */}
         <motion.div
@@ -23,7 +23,6 @@ export default function LeadershipManifesto() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.6 }}
         >
           <p className="uppercase tracking-[3px] md:tracking-[5px] text-[#C89B3C] font-semibold text-xs sm:text-sm">
             From The Correspondent&apos;s Desk
@@ -47,7 +46,6 @@ export default function LeadershipManifesto() {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7 }}
           >
             {/* Soft spotlight glow */}
             <div
@@ -65,12 +63,12 @@ export default function LeadershipManifesto() {
               <img
                 src="/corres.jpg"
                 alt="S. Vinod Kumar Reddy — Correspondent, IREAD ALPHA"
-                className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:brightness-110"
+                className="w-full h-full object-cover"
                 style={{ objectPosition: "center 25%" }}
               />
 
               {/* Subtle gold vignette on hover */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+              <div className="absolute inset-0 opacity-0 pointer-events-none"
                 style={{
                   background: "radial-gradient(ellipse at center, transparent 50%, rgba(200,155,60,0.08) 100%)",
                 }}
@@ -83,7 +81,6 @@ export default function LeadershipManifesto() {
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7 }}
           >
             <div
               className="text-[#C89B3C] text-4xl sm:text-5xl md:text-6xl lg:text-8xl leading-none mb-3 sm:mb-4 md:mb-6"
@@ -150,7 +147,6 @@ export default function LeadershipManifesto() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
               className={`
                 border border-white/10 rounded-[20px] sm:rounded-[24px] md:rounded-[30px] p-5 sm:p-6 md:p-8 lg:p-10 bg-white/[0.03] transition duration-500 hover:-translate-y-2 hover:bg-white/[0.08]
                 ${index === 2 ? "sm:col-span-2 lg:col-span-1" : ""}

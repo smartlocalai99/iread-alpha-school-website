@@ -91,7 +91,6 @@ export default function ProgramsSection() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [countdown, setCountdown] = useState(5);
   const [isPaused, setIsPaused] = useState(false);
-  const [hasAnimated, setHasAnimated] = useState(false);
   const pauseTimeoutRef = useRef(null);
   const { ref, inView } = useInView({ triggerOnce: false, threshold: 0.2 });
 
@@ -119,13 +118,6 @@ export default function ProgramsSection() {
 
     return () => clearInterval(timer);
   }, [isPaused, inView, goToNext]);
-
-  // Trigger orbital animation on first view
-  useEffect(() => {
-    if (inView && !hasAnimated) {
-      setHasAnimated(true);
-    }
-  }, [inView, hasAnimated]);
 
   const selectProgram = (index) => {
     setActiveIndex(index);
@@ -196,7 +188,7 @@ export default function ProgramsSection() {
       style={{ background: "linear-gradient(180deg, #FDFBF7 0%, #FFF 50%, #FDFBF7 100%)" }}
     >
       {/* Section Header */}
-      <div className="max-w-[1450px] mx-auto px-5 sm:px-6 lg:px-8">
+      <div className="px-5 sm:px-6 lg:px-8">
         <div className="text-center mb-12 md:mb-16">
           <div className="flex justify-center items-center gap-3 mb-4">
             <div className="w-3 h-3 rotate-45 bg-[#C89B3C]" />
@@ -231,7 +223,6 @@ export default function ProgramsSection() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.25 }}
                 className="bg-white rounded-[24px] md:rounded-[28px] border border-gray-100 shadow-lg overflow-hidden"
               >
                 {/* Image */}
@@ -347,7 +338,6 @@ export default function ProgramsSection() {
                       whileHover={{ scale: 1.15 }}
                       whileTap={{ scale: 0.92 }}
                       animate={isActive ? { scale: 1.1 } : { scale: 1 }}
-                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
                     >
                       {/* Image node with circular crop */}
                       <div className="relative">
@@ -364,10 +354,10 @@ export default function ProgramsSection() {
                         {/* Image container */}
                         <div
                           className={`
-                            relative rounded-full overflow-hidden transition-all duration-400 shadow-sm
+                            relative rounded-full overflow-hidden shadow-sm
                             ${isActive
                               ? "shadow-lg ring-0"
-                              : "border-2 border-gray-200 group-hover:border-[#C89B3C] group-hover:shadow-md"
+                              : "border-2 border-gray-200"
                             }
                           `}
                           style={{ width: `${nodeSize}px`, height: `${nodeSize}px` }}
@@ -380,10 +370,10 @@ export default function ProgramsSection() {
 
                           {/* Dark overlay for inactive */}
                           <div
-                            className={`absolute inset-0 transition-all duration-300 ${
+                            className={`absolute inset-0 ${
                               isActive
                                 ? "bg-transparent"
-                                : "bg-[#0B2148]/20 group-hover:bg-transparent"
+                                : "bg-[#0B2148]/20"
                             }`}
                           />
                         </div>
@@ -391,8 +381,8 @@ export default function ProgramsSection() {
                         {/* Small icon badge */}
                         <div
                           className={`
-                            absolute -bottom-1 -right-1 rounded-full flex items-center justify-center text-white shadow-md transition-all duration-300
-                            ${isActive ? "bg-[#C89B3C]" : "bg-[#0B2148] group-hover:bg-[#C89B3C]"}
+                            absolute -bottom-1 -right-1 rounded-full flex items-center justify-center text-white shadow-md
+                            ${isActive ? "bg-[#C89B3C]" : "bg-[#0B2148]"}
                           `}
                           style={{ width: nodeSize < 60 ? 18 : 24, height: nodeSize < 60 ? 18 : 24 }}
                         >
@@ -403,10 +393,9 @@ export default function ProgramsSection() {
                       {/* Label — hidden on very small screens to avoid overlap */}
                       <span
                         className={`
-                          hidden sm:block text-[9px] md:text-[10px] font-semibold text-center leading-tight uppercase tracking-wide transition-colors duration-300
-                          ${isActive ? "text-[#0B2148]" : "text-gray-500 group-hover:text-[#0B2148]"}
+                          hidden sm:block text-[9px] md:text-[10px] font-semibold text-center leading-tight uppercase tracking-wide
+                          ${isActive ? "text-[#0B2148]" : "text-gray-500]"}
                         `}
-                        style={{ maxWidth: `${labelMaxW}px` }}
                       >
                         {program.title}
                       </span>
@@ -445,7 +434,6 @@ export default function ProgramsSection() {
               </div>
             </div>
 
-            {/* Auto-rotation indicator */}
             <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-gray-500">
               <svg
                 width="14"
@@ -453,16 +441,11 @@ export default function ProgramsSection() {
                 viewBox="0 0 16 16"
                 fill="none"
               >
-                <circle cx="8" cy="8" r="7" stroke="#C89B3C" strokeWidth="1.5" strokeDasharray="4 3" />
               </svg>
-              <span>AUTO ROTATING IN</span>
-              <span className="inline-flex items-center justify-center w-6 h-6 sm:w-7 sm:h-7 rounded-md bg-[#0B2148] text-white text-[10px] sm:text-xs font-bold">
-                {isPaused ? "⏸" : String(countdown).padStart(2, "0")}
-              </span>
-              <span>SEC</span>
+               
             </div>
 
-            <p className="text-[10px] sm:text-xs text-gray-400 mt-1.5 sm:mt-2">
+            <p className="text-[10px] sm:text-xs text-gray-400">
               Tap any program to explore
             </p>
           </div>

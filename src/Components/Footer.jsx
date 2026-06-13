@@ -33,13 +33,12 @@ export default function Footer() {
     <footer className="bg-[#071B3D] text-white">
 
       {/* Top CTA — perspective tilt scale-in */}
-      <div className="max-w-[1450px] mx-auto px-5 sm:px-6 lg:px-8 pt-16 md:pt-20">
+      <div className="px-5 sm:px-6 lg:px-8 pt-16 md:pt-20">
         <motion.div
           className="relative overflow-hidden rounded-[24px] md:rounded-[32px] bg-gradient-to-r from-[#0B1F45] to-[#12336B]"
           initial={{ opacity: 0, y: 50, rotateX: 8, scale: 0.95 }}
           whileInView={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.9, type: "spring", stiffness: 60, damping: 12 }}
           style={{ perspective: "800px" }}
         >
           {/* Decorative */}
@@ -54,7 +53,6 @@ export default function Footer() {
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
               >
                 Admissions Open
               </motion.p>
@@ -65,7 +63,6 @@ export default function Footer() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.3, duration: 0.7 }}
               >
                 Shape Your Child&apos;s
                 <br />
@@ -77,7 +74,6 @@ export default function Footer() {
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.5 }}
               >
                 Empowering young minds with academic excellence,
                 leadership and lifelong values.
@@ -88,20 +84,18 @@ export default function Footer() {
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.6 }}
               >
                 <motion.a
                   href="#admissions"
                   onClick={(e) => handleNavClick(e, "#admissions")}
-                  className="bg-[#C89B3C] text-black px-7 py-3.5 rounded-xl font-semibold hover:bg-[#D4AD5A] hover:shadow-lg transition text-sm md:text-base text-center"
+                  className="bg-[#C89B3C] text-black px-7 py-3.5 rounded-xl font-semibold"
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   Apply Now
                 </motion.a>
                 <motion.button
-                  className="border border-white/20 px-7 py-3.5 rounded-xl hover:bg-white/10 transition text-sm md:text-base"
-                  whileHover={{ scale: 1.05, y: -2 }}
+                  className="border border-white/20 px-7 py-3.5 rounded-xl"
                   whileTap={{ scale: 0.95 }}
                 >
                   Download Prospectus
@@ -115,7 +109,6 @@ export default function Footer() {
               initial={{ opacity: 0, x: 40 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.4, duration: 0.8 }}
             >
               <img
                 src="/admissions_students_banner.png"
@@ -129,7 +122,7 @@ export default function Footer() {
 
 
       {/* Main Footer — wave rise-up with staggered columns */}
-      <div className="max-w-[1450px] mx-auto px-5 sm:px-6 lg:px-8 py-14 md:py-20">
+      <div className="px-5 sm:px-6 lg:px-8 py-14 md:py-20">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
 
           {/* Brand */}
@@ -137,15 +130,12 @@ export default function Footer() {
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0 }}
           >
             <div className="flex items-center gap-3 mb-5 md:mb-6">
               <motion.img
                 src="/logo.png"
                 alt="IREAD ALPHA"
                 className="w-12 h-12 object-contain"
-                whileHover={{ rotate: 10, scale: 1.1 }}
-                transition={{ type: "spring", stiffness: 200 }}
               />
               <div>
                 <h3
@@ -172,7 +162,6 @@ export default function Footer() {
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.1 }}
           >
             <h4
               className="text-lg md:text-xl font-semibold mb-5 md:mb-6"
@@ -191,8 +180,6 @@ export default function Footer() {
                   initial={{ opacity: 0, x: -15 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: 0.2 + i * 0.08 }}
-                  whileHover={{ x: 5 }}
                 >
                   {item.label}
                 </motion.a>
@@ -205,7 +192,6 @@ export default function Footer() {
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.2 }}
           >
             <h4
               className="text-lg md:text-xl font-semibold mb-5 md:mb-6"
@@ -224,8 +210,6 @@ export default function Footer() {
                   initial={{ opacity: 0, x: -15 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: 0.3 + i * 0.08 }}
-                  whileHover={{ x: 5 }}
                 >
                   {item.label}
                 </motion.a>
@@ -238,7 +222,6 @@ export default function Footer() {
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.3 }}
           >
             <h4
               className="text-lg md:text-xl font-semibold mb-5 md:mb-6"
@@ -261,14 +244,14 @@ export default function Footer() {
 
               <div className="flex items-center gap-3">
                 <Phone size={16} className="text-[#C89B3C] shrink-0" />
-                <a href="tel:+919344167840" className="text-white/70 hover:text-[#C89B3C] transition text-sm md:text-base">
+                <a href="tel:+919344167840" className="text-white/70">
                   +91 93441 67840
                 </a>
               </div>
 
               <div className="flex items-center gap-3">
                 <Mail size={16} className="text-[#C89B3C] shrink-0" />
-                <a href="mailto:info@ireadalpha.edu" className="text-white/70 hover:text-[#C89B3C] transition text-sm md:text-base break-all">
+                <a href="mailto:info@ireadalpha.edu" className="text-white/70 ">
                   info@ireadalpha.edu
                 </a>
               </div>
@@ -294,7 +277,6 @@ export default function Footer() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.5 }}
         >
           <p className="text-white/50 text-sm">
             © 2026 IREAD ALPHA English Medium High School. All Rights Reserved.
@@ -303,13 +285,11 @@ export default function Footer() {
           <div className="flex gap-6 text-white/50 text-sm">
             <motion.p
               className="hover:text-white cursor-pointer transition"
-              whileHover={{ y: -2 }}
             >
               Privacy Policy
             </motion.p>
             <motion.p
               className="hover:text-white cursor-pointer transition"
-              whileHover={{ y: -2 }}
             >
               Terms & Conditions
             </motion.p>

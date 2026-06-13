@@ -25,7 +25,7 @@ export default function AdmissionsSection() {
   ];
 
   return (
-    <section id="admissions" className="max-w-[1450px] mx-auto px-5 sm:px-6 lg:px-8 py-16 md:py-20 lg:py-24">
+    <section id="admissions" className="px-5 sm:px-6 lg:px-8 py-16 md:py-20 lg:py-24">
 
       <div className="grid lg:grid-cols-[45%_55%] gap-8 lg:gap-12 items-center">
 
@@ -34,21 +34,18 @@ export default function AdmissionsSection() {
           initial={{ opacity: 0, x: -50, filter: "blur(10px)" }}
           whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
         >
           <motion.div
             className="flex items-center gap-3 mb-5 flex-wrap"
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
           >
             <motion.div
               className="w-8 sm:w-10 h-[2px] bg-[#C89B3C]"
               initial={{ width: 0 }}
               whileInView={{ width: 40 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
             />
             <p className="text-[#C89B3C] uppercase tracking-[3px] md:tracking-[4px] font-semibold text-sm">
               Admissions Open
@@ -58,7 +55,6 @@ export default function AdmissionsSection() {
               initial={{ width: 0 }}
               whileInView={{ width: 40 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
             />
           </motion.div>
 
@@ -68,7 +64,6 @@ export default function AdmissionsSection() {
             initial={{ opacity: 0, y: 40, filter: "blur(8px)" }}
             whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
           >
             Admissions
             <br />
@@ -80,7 +75,6 @@ export default function AdmissionsSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
           >
             Join a school that nurtures academic excellence,
             character development, creativity and future-ready
@@ -92,18 +86,15 @@ export default function AdmissionsSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.5 }}
           >
             <motion.button
-              className="bg-[#052A63] text-white px-6 sm:px-7 py-3 sm:py-3.5 rounded-xl font-medium hover:bg-[#0B2148] hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-sm md:text-base"
-              whileHover={{ scale: 1.04, y: -2 }}
+              className="bg-[#052A63] text-white px-6 sm:px-7 py-3 sm:py-3.5 rounded-xl font-medium text-sm md:text-base"
               whileTap={{ scale: 0.96 }}
             >
               Apply For Admission
             </motion.button>
             <motion.button
-              className="border border-[#C89B3C] text-[#C89B3C] px-6 sm:px-7 py-3 sm:py-3.5 rounded-xl font-medium hover:bg-[#C89B3C] hover:text-white hover:shadow-lg transition-all duration-300 text-sm md:text-base"
-              whileHover={{ scale: 1.04, y: -2 }}
+              className="border border-[#C89B3C] text-[#C89B3C] px-6 sm:px-7 py-3 sm:py-3.5 rounded-xl font-medium text-sm md:text-base"
               whileTap={{ scale: 0.96 }}
             >
               Download Prospectus
@@ -115,12 +106,11 @@ export default function AdmissionsSection() {
             initial={{ opacity: 0, y: 30, scale: 0.95 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.6, type: "spring", stiffness: 80 }}
           >
             <img
               src="/Hero.jpeg"
               alt="IREAD ALPHA English Medium High School Entrance and Name Board"
-              className="w-full h-full object-cover object-center transition duration-700 group-hover:scale-105"
+              className="w-full h-full object-cover object-center "
             />
           </motion.div>
         </motion.div>
@@ -142,15 +132,7 @@ export default function AdmissionsSection() {
                 scaleY: 1,
               }}
               viewport={{ once: true }}
-              transition={{
-                duration: 0.7,
-                delay: index * 0.18,
-                type: "spring",
-                stiffness: 80,
-                damping: 12,
-              }}
-              whileHover={{ y: -6, scale: 1.01, transition: { duration: 0.3 } }}
-              className="group bg-white border border-gray-100 rounded-[22px] md:rounded-[28px] p-5 sm:p-6 md:p-7 shadow-sm hover:shadow-2xl transition-all duration-500"
+              className="group bg-white border border-gray-100 rounded-[22px] md:rounded-[28px] p-5 sm:p-6 md:p-7 shadow-sm"
             >
               <div className="flex items-start gap-4 md:gap-5">
                 <motion.div
@@ -158,12 +140,6 @@ export default function AdmissionsSection() {
                   initial={{ rotate: -180, scale: 0 }}
                   whileInView={{ rotate: 0, scale: 1 }}
                   viewport={{ once: true }}
-                  transition={{
-                    delay: 0.2 + index * 0.18,
-                    type: "spring",
-                    stiffness: 200,
-                    damping: 12,
-                  }}
                   whileHover={{ scale: 1.1, rotate: 10 }}
                 >
                   {step.number}
@@ -179,7 +155,6 @@ export default function AdmissionsSection() {
                     initial={{ width: 0 }}
                     whileInView={{ width: 40 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.3 + index * 0.18 }}
                   />
 
                   <p className="mt-2.5 sm:mt-3 text-gray-600 leading-6 sm:leading-7 text-xs sm:text-sm md:text-base">
@@ -195,7 +170,6 @@ export default function AdmissionsSection() {
                   initial={{ height: 0 }}
                   whileInView={{ height: 16 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: 0.5 + index * 0.18 }}
                 />
               )}
             </motion.div>
